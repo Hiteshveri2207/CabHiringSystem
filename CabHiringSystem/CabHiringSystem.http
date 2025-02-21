@@ -1,0 +1,6 @@
+@CabHiringSystem_HostAddress = http://localhost:5225
+
+GET {{CabHiringSystem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
