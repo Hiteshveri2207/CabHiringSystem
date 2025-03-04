@@ -8,27 +8,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repository
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly AppDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(AppDbContext context)
+        public Repository(AppDbContext context)
         {
             _context = context;
             _dbSet = context.Set<TEntity>();
-        }
-        public IQueryable<TEntity> GetQueryable()
-        {
-            return _dbSet.AsQueryable();
         }
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
-        public async Task<TEntity> GetByIdAsync(Guid Id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(Id)
+            return await _dbSet.FindAsync(id)
 ;
         }
         public async Task<bool> AddAsync(TEntity entity)
@@ -44,9 +40,9 @@ namespace DataAccessLayer.Repository
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> DeleteAsync(Guid Id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var entity = await _dbSet.FindAsync(Id)
+            var entity = await _dbSet.FindAsync(id)
 ;
             if (entity != null)
             {

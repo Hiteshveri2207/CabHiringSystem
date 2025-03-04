@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataAccessLayer.Entity;
-using DataAccessLayer.Repository;
 using DTO;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Service.Interface;
 
@@ -27,20 +23,12 @@ namespace Service.Implementation
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-        private readonly ILogger<ApplicationUser> _logger;
-        private readonly IGenericRepository<ApplicationUser> _repository;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IMapper mapper, ILogger<ApplicationUser> logger, IGenericRepository<ApplicationUser> repository, IWebHostEnvironment webHostEnvironment)
+        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _mapper = mapper;
-            _logger = logger;
-            _webHostEnvironment = webHostEnvironment;
-
-
         }
         public async Task<string> RegisterAsync(RegisterDTO model)
         {
@@ -49,7 +37,7 @@ namespace Service.Implementation
 
             var result = await _userManager.CreateAsync(user, model.Password);
             user = await _userManager.FindByEmailAsync(model.Email);
-
+            
             if (!result.Succeeded)
                 return null; // Registration failed
             await _userManager.AddToRoleAsync(user, model.RoleName);
@@ -63,6 +51,10 @@ namespace Service.Implementation
 
             return GenerateJwtToken(user);
         }
+
+
+
+
         private string GenerateJwtToken(ApplicationUser user)
         {
             var claims = new[]
@@ -85,4 +77,3 @@ namespace Service.Implementation
         }
     }
 }
-        
