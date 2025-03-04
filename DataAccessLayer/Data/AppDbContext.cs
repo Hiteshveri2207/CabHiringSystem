@@ -13,8 +13,7 @@ namespace DataAccessLayer.Data
         {
         }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
-
-
+        public DbSet<CustomerProfile> Customer { get; set; }
     }
 
 }

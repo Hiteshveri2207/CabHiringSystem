@@ -1,15 +1,14 @@
 using CabHiringSystem.Mapping;
 using DataAccessLayer.Data;
 using DataAccessLayer.Entity;
-using CabHiringSystem.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Service.Implementation;
 using Service.Interface;
-using System;
 using System.Text;
+using DataAccessLayer.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +36,11 @@ builder.Services.AddAuthentication(options =>
     };
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -62,3 +65,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

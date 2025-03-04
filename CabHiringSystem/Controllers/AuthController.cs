@@ -2,8 +2,9 @@
 using Service.Interface;
 using System.Threading.Tasks;
 using DTO;
+using Service.Implementation;
 
-namespace YourNamespace.Controllers
+namespace AuthController.Controllers
 {
     [Route("api/auth")]
     [ApiController]
@@ -19,7 +20,7 @@ namespace YourNamespace.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO model)
         {
-            if (!ModelState.IsValid)  // ❌ Validation fails, return errors
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -40,11 +41,7 @@ namespace YourNamespace.Controllers
 
             return Ok(new { token });
         }
+       
     }
+
 }
-
-
-
-
-
-
