@@ -12,9 +12,9 @@ namespace DataAccessLayer.Repository
         IQueryable<TEntity> GetQueryable();
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(Guid Id);
-        Task<bool> AddAsync(TEntity entity);
-        Task<bool> UpdateAsync(TEntity entity);
+        Task<TEntity> AddAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(Guid Id);
-        
+        Task SaveAsync();
     }
 }

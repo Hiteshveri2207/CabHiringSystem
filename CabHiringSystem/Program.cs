@@ -39,6 +39,14 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IDriverVehicleService, DriverVehicleService>();
+builder.Services.AddScoped<IVehicleImageService, VehicleImageService>();
+
 
 
 // Add services to the container.
