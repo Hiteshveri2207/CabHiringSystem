@@ -10,7 +10,7 @@ namespace DTO
 {
     public class RegisterDTO
     {
-        public string RoleName { get; set; }
+        public string Role { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]
         public string FirstName { get; set; }

@@ -52,7 +52,7 @@ namespace Service.Implementation
 
             if (!result.Succeeded)
                 return null; // Registration failed
-            await _userManager.AddToRoleAsync(user, model.RoleName);
+            await _userManager.AddToRoleAsync(user, model.Role);
             return "User registered successfully!";
         }
         public async Task<string> LoginAsync(LoginDTO model)
@@ -84,5 +84,6 @@ namespace Service.Implementation
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
+
 }
         

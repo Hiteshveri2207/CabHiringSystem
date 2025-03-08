@@ -36,7 +36,7 @@ namespace Service.Implementation
         }
 
 
-
+         
 
 
         public async Task<String> AddOrUpdate(CustomerDTO customerDTO)
@@ -53,7 +53,7 @@ namespace Service.Implementation
 
 
 
-            var existingcustomer = await _repository.GetByIdAsync(customerDTO.Id);
+            var existingcustomer = await _repository.GetByIdAsync(customerDTO.UserId);
 
 
 
@@ -120,8 +120,8 @@ namespace Service.Implementation
 
         public async Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid id)
         {
-            var customerQuery = _repository.GetQueryable(); // Get Customer IQueryable
-            var userQuery = _userManager.Users.AsQueryable(); // Get ApplicationUser IQueryable
+            var customerQuery = _repository.GetQueryable(); 
+            var userQuery = _userManager.Users.AsQueryable();
            
 
             var result = await (from customer in customerQuery
@@ -139,7 +139,7 @@ namespace Service.Implementation
 
                                     PhoneNumber = user.PhoneNumber,
 
-                                    RoleName = "Customer"
+                                    Role = "Customer"
 
 
 
@@ -150,4 +150,9 @@ namespace Service.Implementation
 
     }
 }
+
+
+
+
+
 
