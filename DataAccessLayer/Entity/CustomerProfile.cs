@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class CustomerProfile
+    public class CustomerProfile : BaseEntity
     {
-        
 
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public ApplicationUser User { get; set; }
+
     }   
 }
  
