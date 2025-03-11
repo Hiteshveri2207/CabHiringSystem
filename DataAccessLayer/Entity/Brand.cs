@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class Brand
+    public class Brand : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
     }
 }

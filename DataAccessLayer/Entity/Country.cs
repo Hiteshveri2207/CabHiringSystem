@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class Country
+    public class Country : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<State> States { get; set; } = new List<State>();
     }
