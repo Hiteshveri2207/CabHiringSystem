@@ -18,13 +18,13 @@ namespace CabHiringSystem.Controllers
             _service = service;
             
         }
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<StateDTO>>> GetAllAsync()
         {
             var states = await _service.GetAllAsync();
             return Ok(states);
         }
-        [HttpGet("{Id}")]
+        [HttpGet("Get/{Id}")]
         public async Task<ActionResult<StateDTO>> GetStateById(Guid Id)
         {
             var state = await _service.GetByIdAsync(Id);

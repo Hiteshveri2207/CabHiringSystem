@@ -21,7 +21,7 @@ namespace WebAPI.Controllers
             _driverService = driverService;
             _userManager = userManager;
         }
-        [HttpPost("add")]
+        [HttpPost("Add")]
         public async Task<IActionResult> AddDriver([FromForm] DriverProfileDTO driverDTO)
         {
             if (driverDTO == null)
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
 
 
 
-        [HttpPut("update/{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateDriver(Guid id, [FromForm] DriverProfileDTO driver)
         {
             var success = await _driverService.UpdateDriver(id, driver);

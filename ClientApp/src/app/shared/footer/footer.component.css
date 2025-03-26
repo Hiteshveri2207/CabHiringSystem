@@ -1,0 +1,129 @@
+/* Footer General Styles */
+.footer {
+    background-color: #222;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.footer-top {
+    padding: 60px 0;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Footer Widgets */
+.widget {
+    margin-bottom: 30px;
+}
+
+.widget h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.widget p {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.widget ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.widget ul li {
+    margin-bottom: 10px;
+}
+
+.widget ul li a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.widget ul li a:hover {
+    color: #ffcc00;
+    text-decoration: underline;
+}
+
+/* Social Media Icons */
+.social-share a {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.social-share a:hover {
+    color: #ffcc00;
+}
+
+/* Newsletter */
+.newsletter-widget input.form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+}
+
+.newsletter-widget .btn {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+    color: #333;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.newsletter-widget .btn:hover {
+    background-color: #e6b800;
+    border-color: #e6b800;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    background-color: #111;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-bottom a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .d-sm-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .widget {
+        text-align: center;
+    }
+
+    .social-share {
+        margin-top: 15px;
+    }
+
+    .newsletter-widget input.form-control,
+    .newsletter-widget .btn {
+        width: auto;
+    }
+}

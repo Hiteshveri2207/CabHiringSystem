@@ -12,6 +12,7 @@ namespace CabHiringSystem.Mapping
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email)).ReverseMap();
 
             CreateMap<CustomerProfile, CustomerDTO>().ReverseMap();
+
             CreateMap<DriverProfile, DriverProfileDTO>().ReverseMap();
 
             CreateMap<State, StateDTO>().ReverseMap();

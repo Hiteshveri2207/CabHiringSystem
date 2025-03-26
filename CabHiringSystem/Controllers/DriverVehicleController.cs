@@ -20,7 +20,7 @@ namespace CabHiringSystem.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<ActionResult<DriverVehicleDTO>> Add([FromBody] DriverVehicleDTO driverVehicleDTO)
         {
             if (driverVehicleDTO == null)
@@ -35,7 +35,7 @@ namespace CabHiringSystem.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("Put/{id}")]
         public async Task<ActionResult<DriverVehicleDTO>> Update(Guid id, [FromBody] DriverVehicleDTO driverVehicleDTO)
         {
             if (driverVehicleDTO == null)

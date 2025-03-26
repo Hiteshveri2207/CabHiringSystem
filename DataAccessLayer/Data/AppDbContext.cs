@@ -7,12 +7,14 @@ namespace DataAccessLayer.Data
 {
 
 
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        
+        //public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<CustomerProfile> Customer { get; set; }
         public DbSet<DriverProfile> Driver { get; set; }
         public DbSet<State> States { get; set; }

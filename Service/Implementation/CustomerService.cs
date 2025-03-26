@@ -125,7 +125,7 @@ namespace Service.Implementation
            
 
             var result = await (from customer in customerQuery
-                                join user in userQuery on customer.UserId.ToString() equals user.Id
+                                join user in userQuery on customer.UserId.ToString() equals user.Id.ToString()
                                 where customer.Id == id
                                 select new CustomerResponseDto
                                 {

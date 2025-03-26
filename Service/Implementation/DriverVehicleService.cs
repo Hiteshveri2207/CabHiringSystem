@@ -46,12 +46,12 @@ namespace Service.Implementation
             };
         }
 
-        public async Task<DriverVehicleDTO> UpdateAsync(Guid id, DriverVehicleDTO driverVehicleDTO)
+        public async Task<DriverVehicleDTO> UpdateAsync(Guid Id, DriverVehicleDTO driverVehicleDTO)
         {
             if (driverVehicleDTO == null)
                 throw new ArgumentNullException(nameof(driverVehicleDTO));
 
-            var existingEntity = await _repository.GetByIdAsync(id);
+            var existingEntity = await _repository.GetByIdAsync(Id);
             if (existingEntity == null)
                 return null;
 
