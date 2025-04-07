@@ -1,27 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using CabHiringSystem.Services;
-using DTO;
+﻿using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/CarColor")]
     [ApiController]
     public class CarColorController : ControllerBase
     {
-        private readonly ICarColorService _carColorService;
+       
+     private readonly ICarColorService _carColorService;
 
         public CarColorController(ICarColorService carColorService)
         {
             _carColorService = carColorService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CarColorDTO>>> GetAllColors()
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<CarColorDTO>>> GetAllAsync()
         {
-            var colors = await _carColorService.GetAllColorsAsync();
+            var colors = await _carColorService.GetAllAsync();
             return Ok(colors);
         }
+
     }
 }

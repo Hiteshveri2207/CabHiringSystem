@@ -8,9 +8,8 @@ namespace DataAccessLayer.Entity
 {
     public class CarColor
     {
-        public Guid Id { get; set; }
-        public string Color { get; set; }        
-       
+       public Guid Id { get; set; }
+     public string Color { get; set; }
+
     }
 }
-

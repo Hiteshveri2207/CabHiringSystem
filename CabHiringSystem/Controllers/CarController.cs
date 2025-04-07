@@ -1,62 +1,68 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using DTO;
-using Services;
+﻿using DTO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Service.Interface;
 
-namespace API.Controllers
+namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Car")]
     [ApiController]
     public class CarController : ControllerBase
     {
-        private readonly ICarService _carService;
 
-        public CarController(ICarService carService)
-        {
-            _carService = carService;
-        }
+            private readonly ICarService _carService;
 
-        [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<CarDTO>>> GetAllCars()
-        {
-            var cars = await _carService.GetAllCarsAsync();
-            return Ok(cars);
-        }
+            public CarController(ICarService carService)
+            {
+                _carService = carService;
+            }
 
-        [HttpPost("Add")]
-        public async Task<ActionResult<CarDTO>> AddCar([FromBody] CarDTO carDTO)
-        {
-            if (carDTO == null)
-                return BadRequest("Car data is required");
+            // Add a new car
+            [HttpPost("add")]
+            public async Task<ActionResult<CarDTO>> AddCar([FromBody] CarDTO carDTO)
+            {
+                if (carDTO == null)
+                    return BadRequest("Car data is required.");
 
-            var createdCar = await _carService.AddCarAsync(carDTO);
-            return Ok(createdCar); 
-        }
+                var addedCar = await _carService.AddAsync(carDTO);
+                return (addedCar);
+            }
 
+            // Get all cars
+            [HttpGet("all")]
+            public async Task<ActionResult<IEnumerable<CarDTO>>> GetAllCars()
+            {
+                var cars = await _carService.GetAllAsync();
+                return Ok(cars);
+            }
 
-        [HttpPut("{Id}")]
-        public async Task<ActionResult<CarDTO>> UpdateCar(Guid Id, [FromBody] CarDTO carDTO)
-        {
-            if (carDTO == null)
-                return BadRequest("Car data is required");
+            // Get a car by ID
+           
 
-            var updatedCar = await _carService.UpdateCarAsync(Id, carDTO);
-            if (updatedCar == null)
-                return NotFound("Car not found");
+            // Update car details
+            [HttpPut("update/{id}")]
+            public async Task<ActionResult<CarDTO>> UpdateCar(Guid id, [FromBody] CarDTO carDTO)
+            {
+                if (carDTO == null)
+                    return BadRequest("Car data is required.");
 
-            return Ok(updatedCar);
-        }
+                var updatedCar = await _carService.UpdateAsync(id, carDTO);
+                if (updatedCar == null)
+                    return NotFound($"Car with ID {id} not found.");
 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult> DeleteCar(Guid Id)
-        {
-            var isDeleted = await _carService.DeleteCarAsync(Id);
-            if (!isDeleted)
-                return NotFound("Car not found");
+                return Ok(updatedCar);
+            }
 
-            return NoContent();
-        }
+            // Delete a car
+            [HttpDelete("delete/{id}")]
+            public async Task<IActionResult> DeleteCar(Guid id)
+            {
+                var result = await _carService.DeleteAsync(id);
+                if (!result)
+                    return NotFound($"Car with ID {id} not found.");
+
+                return NoContent();
+            }
     }
 }
+

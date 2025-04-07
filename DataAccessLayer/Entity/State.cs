@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class State
+    public class State 
     {
         public Guid Id { get; set; }
         public Guid  CountryId { get; set; }

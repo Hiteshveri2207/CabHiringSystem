@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;  
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
@@ -13,24 +13,6 @@ namespace DataAccessLayer.Entity
         public decimal PricePerKM { get; set; }
         public bool IsAvailable { get; set; }
         public decimal PricePerDay { get; set; }
-        
-        
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

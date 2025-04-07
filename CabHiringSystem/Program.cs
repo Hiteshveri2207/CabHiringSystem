@@ -9,8 +9,6 @@ using Service.Implementation;
 using Service.Interface;
 using System.Text;
 using DataAccessLayer.Repository;
-using CabHiringSystem.Services;
-using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +19,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<RoleManager<IdentityRole>>();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -52,26 +51,23 @@ builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarColorService, CarColorService>();
 
 
-
-
-
-
-// Add CORS services
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()  // Allows any origin
-              .AllowAnyMethod()  // Allows any HTTP method (GET, POST, etc.)
-              .AllowAnyHeader(); // Allows any header
+        policy.AllowAnyOrigin() // Angular app URL
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 
 var app = builder.Build();
@@ -83,16 +79,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 
-app.UseCors("AllowAll"); // Enable CORS using the "AllowAll" policy
+app.UseAuthorization();
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();
 
 
-   
-        

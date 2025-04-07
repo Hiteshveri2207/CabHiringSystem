@@ -1,0 +1,92 @@
+<div class="container">
+    <h2>Update Vehicle</h2>
+  
+    <form [formGroup]="updateVehicleForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Driver ID -->
+      <div class="form-group">
+        <label for="driverId">Driver:</label>
+        <input id="driverId" formControlName="driverId" type="text" class="form-control" placeholder="Update Driver" required />
+        <option *ngFor="let driver of driver" [value]=" driver.Id ">{{ driver.name }}</option> 
+      
+      </div>
+      <div class="form-group">
+        <label for="brand">Brand:</label>
+        <select id="brand" class="form-control" formControlName="brandId">
+          <option value="">Select Brand</option>
+          <option *ngFor="let brand of brand" [value]=" brand.id ">{{ brand.name }}</option> 
+        </select>
+      </div>
+      
+      <!-- Vehicle Model -->
+      <div class="form-group">
+        <label for="vehicleModel">Vehicle Model:</label>
+        <input id="vehicleModel" formControlName="vehicleModel" type="text" class="form-control"  required />
+       
+      </div>
+  
+      <!-- Vehicle Number -->
+      <div class="form-group">
+        <label for="vehicleNumber">Vehicle Number:</label>
+        <input id="vehicleNumber" formControlName="vehicleNumber" type="text" class="form-control"  required />
+        
+      </div>
+  
+      <!-- Model Year -->
+      <div class="form-group">
+        <label for="seatingCapacity">Model Year:</label>
+        <select id="seatingCapacity" formControlName="modelYear" class="form-control" required>
+            <option value="" disabled selected>Select Model Year</option>
+            <option value="2ooo">2000 </option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+        </select>
+    </div>
+  
+      <!-- Seating Capacity -->
+      <div class="form-group">
+        <label for="seatingCapacity">Seating Capacity:</label>
+        <select id="seatingCapacity" formControlName="seatingCapacity" class="form-control" required>
+            <option value="" disabled selected>Select Seating Capacity</option>
+            <option value="2">2 Seater</option>
+            <option value="3">3 Seater</option>
+            <option value="4">4 Seater</option>
+            <option value="5">5 Seater</option>
+            <option value="6">6 Seater</option>
+            <option value="7">7 Seater</option>
+        </select>
+    </div>
+    
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary" >
+        Update
+      </button>
+     
+  
+    </form>
+  </div>
+  

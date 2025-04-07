@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 namespace DataAccessLayer.Entity
 {
@@ -6,7 +7,6 @@ namespace DataAccessLayer.Entity
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public string Role { get; set; } = string.Empty;
         public string ProfilePicture { get; set; } = string.Empty;
         
     }

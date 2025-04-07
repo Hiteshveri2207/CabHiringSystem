@@ -1,17 +1,20 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DTO;
 
-namespace Services
+namespace Service.Interface
 {
     public interface ICarService
     {
-        Task<IEnumerable<CarDTO>> GetAllCarsAsync();
-       
-        Task<CarDTO> AddCarAsync(CarDTO carDTO);
-        Task<CarDTO> UpdateCarAsync(Guid Id, CarDTO carDTO);
-        Task<bool> DeleteCarAsync(Guid Id);
+        Task<CarDTO> AddAsync(CarDTO carDTO);
+        Task<IEnumerable<CarDTO>> GetAllAsync();
+        Task<CarDTO> UpdateAsync(Guid Id, CarDTO carDTO);
+
+        Task<bool> DeleteAsync(Guid Id);
+
     }
 }

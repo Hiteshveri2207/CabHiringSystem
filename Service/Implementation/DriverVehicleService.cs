@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
+using DataAccessLayer.Data;
 using DataAccessLayer.Entity;
 using DataAccessLayer.Repository;
 using DTO;
-using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Service.Interface;
 
@@ -12,10 +14,14 @@ namespace Service.Implementation
     public class DriverVehicleService : IDriverVehicleService
     {
         private readonly IGenericRepository<DriverVehicle> _repository;
+        private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public DriverVehicleService(IGenericRepository<DriverVehicle> repository)
+        public DriverVehicleService(IGenericRepository<DriverVehicle> repository, AppDbContext context, IMapper mapper)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _context = context;
+            _mapper = mapper;
         }
 
         //public async Task<IEnumerable<DriverVehicleDTO>> GetAllAsync()
@@ -37,69 +43,98 @@ namespace Service.Implementation
 
         public async Task<DriverVehicleDTO> AddAsync(DriverVehicleDTO driverVehicleDTO)
         {
-            if (driverVehicleDTO == null)
-                throw new ArgumentNullException(nameof(driverVehicleDTO));
-
-            var entity = new DriverVehicle
-            {
-                DriverId = driverVehicleDTO.DriverId,
-                BrandId = driverVehicleDTO.BrandId,
-                VehicleModel = driverVehicleDTO.VehicleModel,
-                VehicleNumber = driverVehicleDTO.VehicleNumber,
-                ModelYear = driverVehicleDTO.ModelYear,
-                SeatingCapacity = driverVehicleDTO.SeatingCapacity,
-            };
-
-            var createdEntity = await _repository.AddAsync(entity);
-            if (createdEntity == null)
-                return null;
-
-            return new DriverVehicleDTO
-            {
-                DriverId = createdEntity.DriverId,
-                BrandId = createdEntity.BrandId,
-                VehicleModel = createdEntity.VehicleModel,
-                VehicleNumber = createdEntity.VehicleNumber,
-                ModelYear = createdEntity.ModelYear,
-                SeatingCapacity = createdEntity.SeatingCapacity,
-            };
+            var driverVehicle = _mapper.Map<DriverVehicle>(driverVehicleDTO);
+            _context.DriverVehicle.Add(driverVehicle);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<DriverVehicleDTO>(driverVehicle);
         }
 
-        public async Task<DriverVehicleDTO> UpdateAsync(Guid id, DriverVehicleDTO driverVehicleDTO)
+
+        public async Task<DriverVehicleDTO> UpdateAsync(Guid Id, DriverVehicleDTO driverVehicleDTO)
         {
-            if (driverVehicleDTO == null)
-                throw new ArgumentNullException(nameof(driverVehicleDTO));
-
-            var existingEntity = await _repository.GetByIdAsync(id);
-            if (existingEntity == null)
-                return null;
-
-            existingEntity.DriverId = driverVehicleDTO.DriverId;
-            existingEntity.BrandId = driverVehicleDTO.BrandId;
-            existingEntity.VehicleModel = driverVehicleDTO.VehicleModel;
-            existingEntity.VehicleNumber = driverVehicleDTO.VehicleNumber;
-            existingEntity.ModelYear = driverVehicleDTO.ModelYear;
-            existingEntity.SeatingCapacity = driverVehicleDTO.SeatingCapacity;
-
-            var updatedEntity = await _repository.UpdateAsync(existingEntity);
-            if (updatedEntity == null)
-                return null;
-
-            return new DriverVehicleDTO
+            var entity = await _context.DriverVehicle.FindAsync(Id);
+            if (entity == null)
             {
-                DriverId = updatedEntity.DriverId,
-                BrandId = updatedEntity.BrandId,
-                VehicleModel = updatedEntity.VehicleModel,
-                VehicleNumber = updatedEntity.VehicleNumber,
-                ModelYear = updatedEntity.ModelYear,
-                SeatingCapacity = updatedEntity.SeatingCapacity,
-            };
+                return null; 
+            }
+            entity.DriverId = driverVehicleDTO.DriverId;
+            entity.BrandId = driverVehicleDTO.BrandId;
+            entity.VehicleNumber = driverVehicleDTO.VehicleNumber;
+            entity.ModelYear = driverVehicleDTO.ModelYear;
+            entity.VehicleModel = driverVehicleDTO.VehicleModel;
+            entity.SeatingCapacity = driverVehicleDTO.SeatingCapacity;
+
+
+            await _context.SaveChangesAsync();
+
+            return driverVehicleDTO;
         }
+
 
         public async Task<bool> DeleteAsync(Guid Id)
         {
-            var isDeleted = await _repository.DeleteAsync(Id);
-            return isDeleted;
+            var driverVehicle = await _context.DriverVehicle.FindAsync(Id);
+            if (driverVehicle == null) return false;
+
+            _context.DriverVehicle.Remove(driverVehicle);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<(IEnumerable<DriverVehicleResponseDTO>Vehicle, int TotalCount)> GetAllAsync(int pageNumber, int pageSize)
+        {
+            var query = from dv in _context.DriverVehicle
+                        join brand in _context.Brand on dv.BrandId equals brand.Id
+                        join driver in _context.Driver on dv.DriverId equals driver.Id
+                        join user in _context.Users on driver.UserId.ToString() equals user.Id
+                        select new DriverVehicleResponseDTO
+                        {
+                            Id = dv.Id.ToString(),
+                            DriverId = dv.DriverId,
+                            BrandId = dv.BrandId,
+                            VehicleModel = dv.VehicleModel,
+                            VehicleNumber = dv.VehicleNumber,
+                            ModelYear = dv.ModelYear,
+                            SeatingCapacity = dv.SeatingCapacity,
+                            BrandName = brand.Name,
+                            DriverName = user.FirstName + " " + user.LastName
+                        };
+
+            int totalCount = await query.CountAsync(); 
+            var pagedResult = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (pagedResult, totalCount);
+        }
+
+
+        public async Task<DriverVehicleResponseDTO> GetByIdAsync(Guid Id)
+        {
+            //var entity = await _repository.GetQueryable()
+            //     //.Include(x => x.BrandId)
+            //     .FirstOrDefaultAsync(x => x.Id == Id);
+            var result = await (from dv in _context.DriverVehicle
+                                join brand in _context.Brand on dv.BrandId equals brand.Id
+                                join driver in _context.Driver on dv.DriverId equals driver.Id
+                                join user in _context.Users on driver.UserId.ToString() equals user.Id
+                                where dv.Id == Id
+                                select new DriverVehicleResponseDTO
+                                {
+                                    Id = dv.Id.ToString(),
+                                    DriverId = dv.DriverId,
+                                    BrandId = dv.BrandId,
+                                    VehicleModel = dv.VehicleModel,
+                                    VehicleNumber = dv.VehicleNumber,
+                                    ModelYear = dv.ModelYear,
+                                    SeatingCapacity = dv.SeatingCapacity,
+                                    BrandName = brand.Name,
+                                    DriverName = user.FirstName + " " + user.LastName
+
+                                }).FirstOrDefaultAsync();
+
+            return result;
         }
 
     }

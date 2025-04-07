@@ -9,7 +9,7 @@ using DataAccessLayer.Entity;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Driver")]
     [ApiController]
     public class DriverController : ControllerBase
     {
@@ -21,8 +21,8 @@ namespace WebAPI.Controllers
             _driverService = driverService;
             _userManager = userManager;
         }
-        [HttpPost("add")]
-        public async Task<IActionResult> AddDriver([FromForm] DriverProfileDTO driverDTO)
+        [HttpPost("Add")]
+        public async Task<ActionResult<DriverProfileDTO>> AddDriver([FromForm] DriverProfileDTO driverDTO)
         {
             if (driverDTO == null)
             {
@@ -42,12 +42,11 @@ namespace WebAPI.Controllers
 
 
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateDriver(Guid id, [FromForm] DriverProfileDTO driver)
+        [HttpPut("Update/{Id}")]
+        public async Task<ActionResult<bool>> UpdateDriver(Guid Id, [FromForm] DriverProfileDTO driver)
         {
-            var success = await _driverService.UpdateDriver(id, driver);
+            var success = await _driverService.UpdateDriver(Id, driver);
             if (!success) return NotFound(new { message = "Driver not found" });
-
             return Ok(new { message = "Driver updated successfully" });
         }
     }
@@ -55,5 +54,6 @@ namespace WebAPI.Controllers
 
               
 
-   
-
+      
+    }
+}

@@ -11,6 +11,6 @@ namespace Service.Interface
     public interface IVehicleImageService
     {
         Task<bool> UploadVehicleImageAsync(Guid vehicleId, IFormFile image);
-      
+        Task<VehicleImageDTO> GetById(Guid vehicleId);
     }
 }

@@ -2,12 +2,11 @@
 using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Brand")]
     [ApiController]
     public class BrandController : ControllerBase
     {
@@ -18,9 +17,8 @@ namespace CabHiringSystem.Controllers
         }
 
 
-        [HttpPost("Add")]
-
-        public async Task<ActionResult<BrandDTO>> AddAsync([FromBody] BrandDTO brandDTO)
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<IEnumerable<BrandResponseDTO>>> GetAllAsync()
         {
             var result = await _brandService.AddAsync(brandDTO);
             return result;
@@ -36,7 +34,7 @@ namespace CabHiringSystem.Controllers
             if (!updated)
                 return NotFound("Brand not found.");
 
-            return NoContent();
+            return NoContent(); 
         }
 
 

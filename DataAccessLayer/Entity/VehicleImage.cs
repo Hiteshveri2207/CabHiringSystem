@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class VehicleImage
+    public class VehicleImage : BaseEntity
     {
-        public Guid Id { get; set; }
         public Guid VehicleId { get; set; }
         public string Image { get; set; } 
     }

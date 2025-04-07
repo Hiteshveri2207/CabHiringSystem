@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class DriverProfile
+    public class DriverProfile : BaseEntity
     {
         
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public int? Experience { get; set; }
         public string AadharCardFrontPhoto { get; set; }

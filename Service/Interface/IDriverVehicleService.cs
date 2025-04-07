@@ -13,8 +13,8 @@ namespace Service.Interface
         Task<DriverVehicleDTO> AddAsync(DriverVehicleDTO driverVehicleDTO);
         Task<DriverVehicleDTO> UpdateAsync(Guid Id, DriverVehicleDTO driverVehicleDTO);
         Task<bool> DeleteAsync(Guid Id);
-
-        
+        Task<(IEnumerable<DriverVehicleResponseDTO>Vehicle, int TotalCount)> GetAllAsync(int pageNumber, int pageSize);
+        Task<DriverVehicleResponseDTO> GetByIdAsync(Guid Id);
 
     }
 }

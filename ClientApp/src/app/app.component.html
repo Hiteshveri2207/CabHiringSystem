@@ -1,4 +1,12 @@
-
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-header *ngIf="showHeaderFooter"></app-header>
+<app-driverheader *ngIf="!showHeaderFooter"></app-driverheader>
+<div class="container">
+  <div class="row">
+    <app-nav class="col-sm-3" *ngIf="!showHeaderFooter"></app-nav>
+    <div class="col-sm-9 sec-padding">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<app-footer *ngIf="showHeaderFooter"></app-footer>
+<app-driverfooter *ngIf="!showHeaderFooter"></app-driverfooter>

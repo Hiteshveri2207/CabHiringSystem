@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Data;
 using DataAccessLayer.Entity;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/VehicleImage")]
     [ApiController]
     public class VehicleImageController : ControllerBase
 
@@ -57,7 +58,20 @@ namespace CabHiringSystem.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Image uploaded successfully", imagePath = relativePath });
-        } 
+        }
+        [HttpGet("GetById")]
+        public async Task<ActionResult<VehicleImageDTO>> GetById(Guid vehicleId)
+        {
+            var vehicleImage = await _service.GetById(vehicleId);
+
+            if (vehicleImage == null)
+            {
+                return NotFound(new { message = "Vehicle image not found" });
+            }
+
+            return Ok(vehicleImage);
+        }
+
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using DataAccessLayer.Entity;
+using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Service.Implementation;
 using Service.Interface;
@@ -7,54 +8,50 @@ using System.Threading.Tasks;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/DriverVehicle")]
     [ApiController]
     public class DriverVehicleController : ControllerBase
     {
-        private readonly IDriverVehicleService _service;
-        private object GetById;
+        private readonly IDriverVehicleService _driverVehicleService;
 
-        public DriverVehicleController(IDriverVehicleService service)
+        public DriverVehicleController(IDriverVehicleService driverVehicleService)
         {
             _service = service;
-
         }
 
-        [HttpPost]
-        public async Task<ActionResult<DriverVehicleDTO>> Add([FromBody] DriverVehicleDTO driverVehicleDTO)
+
+
+        [HttpPost("Add")]
+        public async Task<ActionResult<DriverVehicleDTO>> AddAsync([FromBody] DriverVehicleDTO driverVehicleDTO)
         {
             if (driverVehicleDTO == null)
-                return BadRequest("Invalid data.");
+                return BadRequest(new { message = "Invalid data provided" });
 
             var result = await _service.AddAsync(driverVehicleDTO);
             if (result == null)
                 return BadRequest("Unable to create DriverVehicle.");
 
-
-            return Created("", result);
+           
+            return Created("", result);  
         }
-
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<DriverVehicleDTO>> Update(Guid id, [FromBody] DriverVehicleDTO driverVehicleDTO)
+        [HttpPut("Update/{Id}")]
+        public async Task <IActionResult> UpdateAsync(Guid Id, [FromBody] DriverVehicleDTO driverVehicleDTO)
         {
-            if (driverVehicleDTO == null)
-                return BadRequest("Invalid data.");
 
-            var result = await _service.UpdateAsync(id, driverVehicleDTO);
-            if (result == null) return NotFound("DriverVehicle not found.");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = await _driverVehicleService.UpdateAsync(Id, driverVehicleDTO);
+            if (result == null) return NotFound();
 
             return Ok(result);
         }
 
-
+       
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(Guid id)
         {
-            var success = await _service.DeleteAsync(id);
-            if (!success) return NotFound("DriverVehicle not found.");
-
-            return NoContent();
+            var success = await _driverVehicleService.DeleteAsync(Id);
+            return success ? NoContent() : NotFound(new { message = "Driver-Vehicle not found" });
         }
     }
 }     

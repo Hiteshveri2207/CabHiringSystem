@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiServiceService } from './api.service';
+import { ApiService } from './api.service';
 import { environment } from '../environment/environment';
 
 @Injectable({
@@ -10,15 +10,14 @@ import { environment } from '../environment/environment';
 export class RegisterService {
   private endpoint = 'Auth'; // Endpoint
 private apiURL = environment.baseUrl
-  constructor(private Http: HttpClient, private apiService: ApiServiceService) { }
+  constructor(private Http: HttpClient, private apiService: ApiService) { }
 
   // register user
-  addItem(userdata: any): Observable<any> {
-    debugger;
+  register(userdata: any): Observable<any> {
     return this.apiService.post(`Auth/register`, userdata);
   }
-  SignIn(userdata: any): Observable<any> {
-    return this.apiService.post(`Auth/Login`, userdata);
+  LogIn(userdata: any): Observable<any> {
+    return this.apiService.post(`Auth/login`, userdata);
   }
-
+ 
 }

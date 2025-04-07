@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Entity
 {
-    public class Address
+    public class Address : BaseEntity
     {
-        public Guid Id { get; set; }
+
         public string AddressLine1 { get; set; }
+
         public string AddressLine2 { get; set; }
         public string City { get; set; }
         public Guid? StateId { get; set; }
