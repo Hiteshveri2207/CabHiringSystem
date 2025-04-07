@@ -1,5 +1,6 @@
 ﻿using DTO;
 using Microsoft.AspNetCore.Mvc;
+using Service.Implementation;
 using Service.Interface;
 using System;
 using System.Threading.Tasks;
@@ -16,9 +17,8 @@ namespace CabHiringSystem.Controllers
         public DriverVehicleController(IDriverVehicleService service)
         {
             _service = service;
+
         }
-
-
 
         [HttpPost]
         public async Task<ActionResult<DriverVehicleDTO>> Add([FromBody] DriverVehicleDTO driverVehicleDTO)
@@ -30,8 +30,8 @@ namespace CabHiringSystem.Controllers
             if (result == null)
                 return BadRequest("Unable to create DriverVehicle.");
 
-           
-            return Created("", result);  
+
+            return Created("", result);
         }
 
 
@@ -47,7 +47,7 @@ namespace CabHiringSystem.Controllers
             return Ok(result);
         }
 
-       
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> Delete(Guid id)
         {
@@ -57,4 +57,7 @@ namespace CabHiringSystem.Controllers
             return NoContent();
         }
     }
-}
+}     
+    
+
+

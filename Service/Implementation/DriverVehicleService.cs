@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using DataAccessLayer.Entity;
 using DataAccessLayer.Repository;
 using DTO;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Service.Interface;
 
 namespace Service.Implementation
@@ -15,6 +17,23 @@ namespace Service.Implementation
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
+
+        //public async Task<IEnumerable<DriverVehicleDTO>> GetAllAsync()
+        //{
+        //    var driverVehicles = await _repository.GetAllAsync();
+
+        //    return driverVehicles.Select(dv => new DriverVehicleDTO
+        //    {
+        //        DriverId = dv.DriverId,
+        //        BrandId = dv.BrandId,
+        //        VehicleModel = dv.VehicleModel,
+        //        VehicleNumber = dv.VehicleNumber,
+        //        ModelYear = dv.ModelYear,
+        //        SeatingCapacity = dv.SeatingCapacity
+        //    }).ToList();
+        //}
+
+
 
         public async Task<DriverVehicleDTO> AddAsync(DriverVehicleDTO driverVehicleDTO)
         {
@@ -82,5 +101,16 @@ namespace Service.Implementation
             var isDeleted = await _repository.DeleteAsync(Id);
             return isDeleted;
         }
+
     }
 }
+
+  
+    
+
+
+
+
+
+
+

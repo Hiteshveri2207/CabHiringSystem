@@ -9,6 +9,8 @@ using Service.Implementation;
 using Service.Interface;
 using System.Text;
 using DataAccessLayer.Repository;
+using CabHiringSystem.Services;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,9 +48,24 @@ builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IDriverVehicleService, DriverVehicleService>();
 builder.Services.AddScoped<IVehicleImageService, VehicleImageService>();
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarColorService, CarColorService>();
 
 
 
+
+
+
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()  // Allows any origin
+              .AllowAnyMethod()  // Allows any HTTP method (GET, POST, etc.)
+              .AllowAnyHeader(); // Allows any header
+    });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -66,12 +83,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors("AllowAll"); // Enable CORS using the "AllowAll" policy
 app.MapControllers();
 
 app.Run();
 
 
+   
+        

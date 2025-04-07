@@ -22,8 +22,11 @@ namespace DataAccessLayer.Data
         public DbSet<Brand> Brand { get; set; }
         public DbSet<DriverVehicle> DriverVehicle { get; set; }
         public DbSet<VehicleImage> VehicleImage { get; set; }
-        
-            
-    }
+        public DbSet<CarColor> CarColors { get; set; }
+        public DbSet<Car> Cars { get; set; }
 
+
+    }
 }
+
+       

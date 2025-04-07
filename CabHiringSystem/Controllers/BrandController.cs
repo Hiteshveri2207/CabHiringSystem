@@ -1,6 +1,8 @@
-﻿using DTO;
+﻿using DataAccessLayer.Entity;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Service.Interface;
 
 namespace CabHiringSystem.Controllers
@@ -34,7 +36,7 @@ namespace CabHiringSystem.Controllers
             if (!updated)
                 return NotFound("Brand not found.");
 
-            return NoContent(); 
+            return NoContent();
         }
 
 
@@ -47,5 +49,16 @@ namespace CabHiringSystem.Controllers
 
             return NoContent();
         }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var brands = await _brandService.GetAllAsync();
+            return Ok(brands);
+        }
     }
 }
+
+
+       
+    
+

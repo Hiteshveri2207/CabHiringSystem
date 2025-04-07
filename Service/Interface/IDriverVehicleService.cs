@@ -9,8 +9,12 @@ namespace Service.Interface
 {
     public interface IDriverVehicleService
     {
+       
         Task<DriverVehicleDTO> AddAsync(DriverVehicleDTO driverVehicleDTO);
         Task<DriverVehicleDTO> UpdateAsync(Guid Id, DriverVehicleDTO driverVehicleDTO);
         Task<bool> DeleteAsync(Guid Id);
+
+        
+
     }
 }

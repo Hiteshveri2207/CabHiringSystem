@@ -26,6 +26,9 @@ namespace CabHiringSystem.Mapping
 
             CreateMap<VehicleImage, VehicleImageDTO>().ReverseMap();
 
+            CreateMap<Car, CarDTO>().ReverseMap();
+
+            CreateMap<CarColor,CarColorDTO>().ReverseMap();
         }
     }
 }

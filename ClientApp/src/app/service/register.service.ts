@@ -14,9 +14,10 @@ private apiURL = environment.baseUrl
 
   // register user
   addItem(userdata: any): Observable<any> {
-    return this.apiService.post(`${this.apiURL}/Auth/register`, userdata);
+    debugger;
+    return this.apiService.post(`Auth/register`, userdata);
   }
-  login(userdata: any): Observable<any> {
+  SignIn(userdata: any): Observable<any> {
     return this.apiService.post(`Auth/Login`, userdata);
   }
 

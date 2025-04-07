@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     {
         private readonly IDriverService _driverService;
         private readonly UserManager<ApplicationUser> _userManager;
-
+        
         public DriverController(IDriverService driverService, UserManager<ApplicationUser> userManager)
         {
             _driverService = driverService;
@@ -50,7 +50,10 @@ namespace WebAPI.Controllers
 
             return Ok(new { message = "Driver updated successfully" });
         }
-
-      
     }
 }
+
+              
+
+   
+

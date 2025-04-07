@@ -58,9 +58,9 @@ namespace DataAccessLayer.Repository
             return false;
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
     }
 }

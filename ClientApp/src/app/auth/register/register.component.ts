@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../service/register.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 
@@ -15,7 +16,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder,private registerService:RegisterService) {
+  constructor(private fb: FormBuilder,private registerService:RegisterService ,private router:Router){
+    
 
     this.registerForm= this.fb.group({
      
@@ -31,13 +33,17 @@ export class RegisterComponent {
      
   }
    onSubmit(): void {
-    debugger;
+
 alert('Form Submitted');
+this.router.navigate(['/login']);
         if (this.registerForm.valid) {
           console.log(this.registerForm.value);
         }
         this.registerService.addItem(this.registerForm.value).subscribe({
-          next: (response) => { console.log('user added:', response); } ,
+          next: (response) => { console.log('user added:', response);
+
+             } ,
           error: (error) => console.error("Error", error) });
+          
   }   
 }
