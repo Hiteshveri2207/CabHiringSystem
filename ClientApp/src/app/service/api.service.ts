@@ -7,7 +7,7 @@ import { environment } from '../environment/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiServiceService {
+export class ApiService {
   private apiURL = environment.baseUrl
   constructor(private http: HttpClient) { }
   // GET Request
@@ -18,7 +18,7 @@ export class ApiServiceService {
   }
 
   // POST Request
-  post<T>(endpoint: string, data: any): Observable<T> {
+  post<T>(endpoint: string, data: any, p0?: { isFormData: boolean; }): Observable<T> {
     return this.http.post<T>(`${this.apiURL}/${endpoint}`, data).pipe(
       catchError(this.handleError)
     );

@@ -25,7 +25,7 @@ namespace Service.Implementation
         private readonly AppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAddressService _addressService;
-        
+
 
         public DriverService(IGenericRepository<DriverProfile> repository, IMapper mapper,
             IWebHostEnvironment webHostEnvironment, ILogger<DriverService> logger,
@@ -42,8 +42,8 @@ namespace Service.Implementation
 
         public async Task<DriverProfileDTO> AddDriver(DriverProfileDTO driver)
         {
-           
-            
+
+
             var driverEntity = _mapper.Map<DriverProfile>(driver);
 
             driverEntity.Id = Guid.NewGuid();
@@ -54,12 +54,12 @@ namespace Service.Implementation
                 throw new Exception("User not found");
             }
 
-           
-            if (driver.Experience >= 50 )
+
+            if (driver.Experience >= 50)
             {
                 driverEntity.Experience = driver.Experience;
             }
-            
+
             if (driver.ProfilePicture != null)
             {
                 var profilePicturePath = await SaveFileAsync(driver.ProfilePicture, "uploads");
@@ -67,7 +67,7 @@ namespace Service.Implementation
                 await _userManager.UpdateAsync(user);
             }
 
-            driverEntity.AadharCardFrontPhoto = driver.AadharCardFrontPhoto != null ?await SaveFileAsync(driver.AadharCardFrontPhoto, "uploads") :  null;
+            driverEntity.AadharCardFrontPhoto = driver.AadharCardFrontPhoto != null ? await SaveFileAsync(driver.AadharCardFrontPhoto, "uploads") : null;
             driverEntity.AadharCardBackPhoto = driver.AadharCardBackPhoto != null ? await SaveFileAsync(driver.AadharCardBackPhoto, "uploads") : null;
             driverEntity.LicenseFrontPhoto = driver.LicenseFrontPhoto != null ? await SaveFileAsync(driver.LicenseFrontPhoto, "uploads") : null;
             driverEntity.LicenseBackPhoto = driver.LicenseBackPhoto != null ? await SaveFileAsync(driver.LicenseBackPhoto, "uploads") : null;
@@ -77,7 +77,7 @@ namespace Service.Implementation
             {
                 var addressEntity = _mapper.Map<Address>(driver.Address);
                 await _addressService.AddAsync(driver.Address);
-               
+
             }
 
             var result = await _repository.AddAsync(driverEntity);
@@ -104,7 +104,7 @@ namespace Service.Implementation
                     throw new KeyNotFoundException("User not found.");
                 }
 
-                
+
                 if (driver.Experience != null)
                     driverEntity.Experience = driver.Experience.Value;
 
@@ -148,7 +148,7 @@ namespace Service.Implementation
         {
             if (file == null || file.Length == 0) return null;
 
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" }; 
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
             var extension = Path.GetExtension(file.FileName).ToLower();
 
             if (!allowedExtensions.Contains(extension))
@@ -166,6 +166,12 @@ namespace Service.Implementation
             }
 
             return $"/{subFolder}/{fileName}";
+        }
+
+        public async Task<IEnumerable<DriverProfileDTO>> GetAllAsync()
+        {
+            var drivers = await _repository.GetAllAsync();
+            return _mapper.Map<IEnumerable<DriverProfileDTO>>(drivers);
         }
 
     }

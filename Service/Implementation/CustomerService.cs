@@ -118,15 +118,15 @@ namespace Service.Implementation
         }
 
 
-        public async Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid id)
+        public async Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid Id)
         {
             var customerQuery = _repository.GetQueryable(); 
             var userQuery = _userManager.Users.AsQueryable();
            
 
             var result = await (from customer in customerQuery
-                                join user in userQuery on customer.UserId.ToString() equals user.Id
-                                where customer.Id == id
+                                join user in userQuery on customer.UserId.ToString() equals user.Id.ToString()
+                                where customer.Id == Id
                                 select new CustomerResponseDto
                                 {
                                     FirstName = user.FirstName,

@@ -8,6 +8,11 @@ namespace DTO
 {
     public class BrandDTO
     {
+        
         public string Name { get; set; }
+    }
+    public class BrandResponseDTO: BrandDTO
+    {
+        public Guid Id { get; set; }
     }
 }

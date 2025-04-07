@@ -27,9 +27,12 @@
               }
             ],
             "styles": [
+              
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+          
+            ]
           },
           "configurations": {
             "production": {
@@ -85,8 +88,16 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/swiper-bundle.css",
+              "src/nice-select.css",
+              "src/venobox.css",
+              "src/assets/font-awesome/all.min.css",
+              "node_modules/font-awesome/css/all.min.css",
+              "node_modules/swiper/swiper-bundle.css"
+
             ],
+            
             "scripts": []
           }
         }
@@ -97,3 +108,5 @@
     "analytics": "3ff3957c-553d-4173-a63d-b8e04bc66c03"
   }
 }
+
+
