@@ -22,11 +22,13 @@ namespace Service.Implementation
         private readonly IGenericRepository<VehicleImage> _repository;
         private readonly IWebHostEnvironment _environment;
         private readonly AppDbContext _context;
-        public VehicleImageService(IGenericRepository<VehicleImage> repository, AppDbContext context, IWebHostEnvironment environment)
+        private readonly IMapper _mapper;
+        public VehicleImageService(IGenericRepository<VehicleImage> repository, AppDbContext context, IWebHostEnvironment environment, IMapper mapper)
         {
             _repository = repository;
             _context = context;
             _environment = environment;
+            _mapper = mapper;
         }
         public async Task<bool> UploadVehicleImageAsync(Guid vehicleId, IFormFile image)
         {
@@ -60,8 +62,20 @@ namespace Service.Implementation
 
             return true;
         }
+        public async Task<VehicleImageDTO> GetById(Guid vehicleId)
+        {
+            var vehicleImage = await _context.VehicleImage.FindAsync(vehicleId);
+            if (vehicleImage == null)
+            {
+                return null;
+            }
+
+            return _mapper.Map<VehicleImageDTO>(vehicleImage);
+        }
+
+
     }
-    
+
 }
 
 

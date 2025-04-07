@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2> All Cars</h2>
+    <a href="/driverdashboard/addvehicle" style="padding: 8px 16px; background-color: #fcce04; color: rgb(11, 9, 9);
+     text-decoration: none; border-radius: 4px;">Add Vehicle</a>
+  </div>
+  
+  
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th>Driver</th>
+      <th>Brand</th>
+      <th>Seating Capacity</th>
+      <th>Model Year</th>
+      <th>VehicleModel</th>
+      <th>VehicleNumber</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr *ngFor="let car of cars$ | async">
+        <td>{{ car.driverName }}</td>
+        <td>{{ car.brandName }}</td>
+        <td>{{ car.seatingCapacity }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.vehicleModel }}</td>
+        <td>{{ car.vehicleNumber }}</td>
+        <td>
+      
+          <button (click)="editvehicle(car.id)" class="btn btn-primary mb-3" style="width: 80px; 
+          background-color: #007bff;  padding: 4px 8px; font-size: 0.8rem;">
+            Edit
+          </button>
+          <button (click)="deletecars(car.id)" class="btn btn-primary mb-3" style="width: 100px;
+           background-color: #dc3545; padding: 4px 8px; font-size: 0.8rem;">
+            Delete
+          </button>
+        </td>
+      </tr>
+      
+  </tbody>
+</table>

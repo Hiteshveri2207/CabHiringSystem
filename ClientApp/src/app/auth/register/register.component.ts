@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RoleService } from '../../service/role.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
 
   selector: 'app-register',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],  
 })
@@ -35,7 +35,7 @@ export class RegisterComponent {
     this.getRoles();
   }
   getRoles() {
-    debugger;
+    
     this.roleService.getRoles().subscribe(
       (data) => {
         this.roles = data;
@@ -47,17 +47,28 @@ export class RegisterComponent {
   }
   
   onSubmit(): void {
-
-alert('Form Submitted');
-      this.router.navigate([`/login`]);
-        if (this.registerForm.valid) {
-          console.log(this.registerForm.value); 
-        }
-        this.registerService.register(this.registerForm.value).subscribe({
-          next: (response) => { console.log('user added:', response); } ,
-          error: (error) => console.error("Error", error) });
-  } 
+    if (this.registerForm.valid) {
+      console.log(this.registerForm.value);
   
+      this.registerService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('User registered:', response);
+          alert('User registered successfully!');
+          this.router.navigate(['/login']); 
+        },
+        error: (error) => {
+          console.error('Registration error:', error);
+          alert('Registration failed. Please try again.');
+        }
+      });
+  
+    } else {
+      this.registerForm.markAllAsTouched(); 
+      alert('Form is invalid. Please fix the errors.');
+    }
+  }
+  
+
   navigateToLogin() {
     this.router.navigate(['/login']);
   }

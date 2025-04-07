@@ -12,4 +12,6 @@ namespace Service.Interface
         Task<IEnumerable<StateDTO>> GetAllAsync();
         Task<StateDTO> GetByIdAsync(Guid Id);
     }
+
+  
 }

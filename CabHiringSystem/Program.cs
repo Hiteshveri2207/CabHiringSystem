@@ -47,6 +47,9 @@ builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IDriverVehicleService, DriverVehicleService>();
 builder.Services.AddScoped<IVehicleImageService, VehicleImageService>();
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarColorService, CarColorService>();
+
 
 builder.Services.AddCors(options =>
 {

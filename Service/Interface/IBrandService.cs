@@ -9,10 +9,6 @@ namespace Service.Interface
 {
     public interface IBrandService
     {
-        Task<BrandDTO> AddAsync(BrandDTO brandDTO);
-
-        Task<bool> UpdateAsync(Guid Id, BrandDTO brandDTO);
-
-        Task<bool> DeleteAsync(Guid Id);
+        Task<IEnumerable<BrandResponseDTO>> GetAllAsync();
     }
 }

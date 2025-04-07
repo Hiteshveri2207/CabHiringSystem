@@ -5,7 +5,7 @@ using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Country")]
     [ApiController]
     public class CountryController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace CabHiringSystem.Controllers
         public async Task<ActionResult<IEnumerable<CountryDTO>>> GetAllAsync()
         {
             var countries = await _countryService.GetAllAsync();
-            return Ok(new { Message = "List of the Country ", Data = countries });
+            return Ok(countries);
         }
     }
 }

@@ -13,26 +13,30 @@ import { RegisterService } from '../../service/register.service';
 export class LoginComponent {
   loginForm: FormGroup;
   constructor(private fb: FormBuilder, private registerService: RegisterService, private router: Router) {
-
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]], // Email validation
-      password: ['', [Validators.required, Validators.minLength(6)]]  // Password validation
+      email: ['', [Validators.required, Validators.email]], 
+      password: ['', [Validators.required, Validators.minLength(6)]] 
     });
-
   }
   onSubmit(): void {
-    alert('Form Submitted');
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      console.log(this.loginForm.value); 
+  
+      this.registerService.LogIn(this.loginForm.value).subscribe({
+        next: (response) => {
+          console.log('User logged in:', response);
+          alert(" User LogIn Successfully ");
+          this.router.navigate(['/home']); 
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+          alert(" Please Try Again ");
+        }
+      });
+    } else {
+      console.warn('Login form is invalid');
+      alert("Login form is invalid");
+      this.loginForm.markAllAsTouched(); 
     }
-    this.registerService.SignIn(this.loginForm.value).subscribe({
-      next: (response) => { console.log('user added:', response); },
-      error: (error) => console.error("Error", error)
-    });
-  }
-  login() {
-    console.log("inside login");
-
-    this.router.navigate(['Home']);
   }
 }

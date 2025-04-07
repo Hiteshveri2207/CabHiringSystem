@@ -18,57 +18,24 @@ namespace Service.Implementation
        
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
-        public BrandService(AppDbContext context, IMapper mapper)
+        private  readonly IGenericRepository<Brand> _repository;
+        public BrandService(AppDbContext context, IMapper mapper, IGenericRepository<Brand> repository)
         {
            
             _context = context;
             _mapper = mapper;
+            _repository = repository;
         }
-        public async Task<BrandDTO> AddAsync(BrandDTO brandDTO)
+        public async Task<IEnumerable<BrandResponseDTO>> GetAllAsync()
         {
-            if (brandDTO == null)
-            {
-                throw new ArgumentNullException(nameof(brandDTO));
-            }
+            return await _context.Brand
+           .Select(b => new BrandResponseDTO
+           {
+               Id = b.Id,
+               Name = b.Name
+           }).ToListAsync();
 
-            var brandEntity = _mapper.Map<Brand>(brandDTO);
-
-            _context.Brand.Add(brandEntity);
-            await _context.SaveChangesAsync();
-
-            return _mapper.Map<BrandDTO>(brandEntity);
         }
-        public async Task<bool> UpdateAsync(Guid id, BrandDTO brandDTO)
-        {
-            if (brandDTO == null)
-                throw new ArgumentNullException(nameof(brandDTO));
-
-            var existingBrand = await _context.Brand.FindAsync(id);
-
-            if (existingBrand == null)
-                return false; 
-
-        
-            existingBrand.Name = brandDTO.Name;
-
-            _context.Brand.Update(existingBrand);
-            await _context.SaveChangesAsync();
-
-            return true;
-        }
-        public async Task<bool> DeleteAsync(Guid id)
-        {
-            var brand = await _context.Brand.FindAsync(id);
-
-            if (brand == null)
-                return false; 
-
-            _context.Brand.Remove(brand);
-            await _context.SaveChangesAsync();
-
-            return true; 
-        }
-
 
     }
 

@@ -29,8 +29,11 @@ namespace Service.Implementation
         {
 
             var countries = await _countryRepository.GetAllAsync();
-            return _mapper.Map<IEnumerable<CountryDTO>>(countries);
-
+            return countries.Select(c => new CountryDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+            }).ToList();
         }
        
     }

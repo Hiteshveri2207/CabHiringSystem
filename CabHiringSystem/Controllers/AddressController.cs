@@ -5,7 +5,7 @@ using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Address")]
     [ApiController]
     public class AddressController : ControllerBase
     {

@@ -14,7 +14,7 @@ namespace Service.Interface
         Task<string> AddOrUpdate(CustomerDTO customerDto);
         Task<string> UploadFileAsync(IFormFile file);
 
-        Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid id);
+        Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid Id);
      
     }
 }

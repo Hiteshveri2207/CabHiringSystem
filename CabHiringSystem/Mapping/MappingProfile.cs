@@ -13,19 +13,27 @@ namespace CabHiringSystem.Mapping
 
             CreateMap<CustomerProfile, CustomerDTO>().ReverseMap();
 
-            CreateMap<DriverProfile, DriverProfileDTO>().ReverseMap();
+            CreateMap<DriverProfile, DriverProfileDTO>()
+            .ReverseMap();
 
-            CreateMap<State, StateDTO>().ReverseMap();
-
+            CreateMap<State, VehicleImageDTO>().ReverseMap();
+            
             CreateMap<Country, CountryDTO>().ReverseMap();
 
             CreateMap<Address, AddressDTO>().ReverseMap();
 
             CreateMap<Brand, BrandDTO>().ReverseMap();
 
-            CreateMap<DriverVehicle, DriverVehicleDTO>().ReverseMap();
+            CreateMap<DriverVehicleDTO, DriverVehicle>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).
+            ReverseMap();
+
 
             CreateMap<VehicleImage, VehicleImageDTO>().ReverseMap();
+
+            CreateMap<Car, CarDTO>().ReverseMap();
+
+            CreateMap<CarColor, CarColorDTO>().ReverseMap();
 
         }
     }

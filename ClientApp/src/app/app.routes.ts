@@ -10,22 +10,26 @@ import { DriverfooterComponent } from './driverdashboard/driverfooter/driverfoot
 import { NavComponent } from './driverdashboard/nav/nav.component';
 import { DriverheaderComponent } from './driverdashboard/driverheader/driverheader.component';
 import { DriverdashboardComponent } from './driverdashboard/driverdashboard.component';
+import { AddvehicleComponent } from './driverdashboard/addvehicle/addvehicle.component';
+import { CarlistsComponent } from './driverdashboard/carlists/carlists.component';
+import { UpdateVehicleComponent } from './driverdashboard/updatevehicle/updatevehicle.component';
 
 
 
 export const routes: Routes = [
-  
-
     {path:'',component:HomeComponent},
-    {path:'Home',component:HomeComponent},
+    {path:'home',component:HomeComponent},
     {path:'about',component:AboutComponent},
     {path:'service',component:ServiceComponent},
     {path:'contact',component:ContactComponent},
     {path:'book-ride',component:BookRideComponent},
     {path:'register',component:RegisterComponent},
     {path:'login',component:LoginComponent},
-    {path:'header',component:DriverheaderComponent},
-    {path:'footer',component:DriverfooterComponent},
-    {path:'nav',component:NavComponent},
-    {path:'driverdashboard',component:DriverdashboardComponent}
+    {path:'driverdashboard/driverheader',component:DriverheaderComponent},
+    {path:'driverdashboard/driverfooter',component:DriverfooterComponent},
+    {path:'driverdashboard/nav',component:NavComponent},
+    {path:'driverdashboard',component:DriverdashboardComponent},
+    {path:'driverdashboard/addvehicle',component:AddvehicleComponent},
+    {path:'driverdashboard/carlists',component:CarlistsComponent},
+    {path:'driverdashboard/updatevehicle',component:UpdateVehicleComponent}
 ];

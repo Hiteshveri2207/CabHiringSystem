@@ -8,7 +8,7 @@ using Service.Interface;
 
 namespace CabHiringSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/State")]
     [ApiController]
     public class StateController : ControllerBase
     {
