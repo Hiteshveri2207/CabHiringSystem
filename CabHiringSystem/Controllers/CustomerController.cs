@@ -2,7 +2,6 @@
 using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Service.Implementation;
 using Service.Interface;
 
@@ -58,3 +57,5 @@ namespace CabHiringSystem.Controllers
         }
     }
 }
+
+
