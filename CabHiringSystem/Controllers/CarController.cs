@@ -17,8 +17,7 @@ namespace CabHiringSystem.Controllers
                 _carService = carService;
             }
 
-            // Add a new car
-            [HttpPost("add")]
+            [HttpPost("Add")]
             public async Task<ActionResult<CarDTO>> AddCar([FromBody] CarDTO carDTO)
             {
                 if (carDTO == null)
@@ -28,38 +27,32 @@ namespace CabHiringSystem.Controllers
                 return (addedCar);
             }
 
-            // Get all cars
-            [HttpGet("all")]
+            [HttpGet("GetAll")]
             public async Task<ActionResult<IEnumerable<CarDTO>>> GetAllCars()
             {
                 var cars = await _carService.GetAllAsync();
                 return Ok(cars);
             }
 
-            // Get a car by ID
-           
-
-            // Update car details
-            [HttpPut("update/{id}")]
-            public async Task<ActionResult<CarDTO>> UpdateCar(Guid id, [FromBody] CarDTO carDTO)
+            [HttpPut("Update/{Id}")]
+            public async Task<ActionResult<CarDTO>> UpdateCar(Guid Id, [FromBody] CarDTO carDTO)
             {
                 if (carDTO == null)
                     return BadRequest("Car data is required.");
 
-                var updatedCar = await _carService.UpdateAsync(id, carDTO);
+                var updatedCar = await _carService.UpdateAsync(Id, carDTO);
                 if (updatedCar == null)
-                    return NotFound($"Car with ID {id} not found.");
+                    return NotFound($"Car with ID {Id} not found.");
 
                 return Ok(updatedCar);
             }
 
-            // Delete a car
-            [HttpDelete("delete/{id}")]
-            public async Task<IActionResult> DeleteCar(Guid id)
+            [HttpDelete("Delete/{Id}")]
+            public async Task<IActionResult> DeleteCar(Guid Id)
             {
-                var result = await _carService.DeleteAsync(id);
+                var result = await _carService.DeleteAsync(Id);
                 if (!result)
-                    return NotFound($"Car with ID {id} not found.");
+                    return NotFound($"Car with ID {Id} not found.");
 
                 return NoContent();
             }

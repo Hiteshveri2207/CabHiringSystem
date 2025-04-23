@@ -16,7 +16,7 @@ namespace DTO
       
     }
 
-    public class CustomerResponseDto
+    public class CustomerResponseDTO : CustomerDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -6,14 +6,14 @@
 		  <div class="col-6">
 			<label for="firstName" class="form-label">First Name</label>
 			<input type="text" id="firstName" class="form-control" formControlName="firstName" placeholder="Enter your first name" />
-			<div *ngIf="registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched" style="color:red">
+			<div *ngIf="registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched"  class="text-danger" style="color:red">
 			  *First Name is required.
 			</div>
 		  </div>
 		  <div class="col-6">
 			<label for="lastName" class="form-label">Last Name</label>
 			<input type="text" id="lastName" class="form-control" formControlName="lastName" placeholder="Enter your last name" />
-			<div *ngIf="registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched" class="text-danger">
+			<div *ngIf="registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched" class="text-danger"  style="color:red">
 			  Last Name is required.
 			</div>
 		  </div>
@@ -22,14 +22,14 @@
 		  <div class="col-6">
 			<label for="email" class="form-label">Email</label>
 			<input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email" />
-			<div *ngIf="registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched" class="text-danger">
+			<div *ngIf="registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched" class="text-danger" style="color:red">
 			  Valid Email is required.
 			</div>
 		  </div>
 		  <div class="col-6">
 			<label for="phoneNumber" class="form-label">Phone Number</label>
 			<input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber" placeholder="Enter your phone number" />
-			<div *ngIf="registerForm.controls['phoneNumber'].errors?.['required'] && registerForm.controls['phoneNumber'].touched" class="text-danger">
+			<div *ngIf="registerForm.controls['phoneNumber'].errors?.['required'] && registerForm.controls['phoneNumber'].touched" class="text-danger" style="color:red">
 			  Enter a valid 10-digit phone number.
 			</div>
 		  </div>
@@ -38,14 +38,14 @@
 		  <div class="col-6">
 			<label for="password" class="form-label">Password</label>
 			<input type="password" id="password" class="form-control" formControlName="password" placeholder="Enter your password" />
-			<div *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched" class="text-danger">
+			<div *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched"  style="color:red" class="text-danger">
 			  Password is required.
 			</div>
 		  </div>
 		  <div class="col-6">
 			<label for="confirmPassword" class="form-label">Confirm Password</label>
 			<input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" placeholder="Confirm your password" />
-			<div *ngIf="registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched" class="text-danger">
+			<div *ngIf="registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched"  style="color:red" class="text-danger">
 			  Password confirmation is required.
 			</div>
 		  </div>
@@ -56,11 +56,11 @@
 			
 			<option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
 		   </select>
-		 <div *ngIf="registerForm.controls['role'].errors?.['required'] && registerForm.controls['role'].touched" class="text-danger">
+		 <div *ngIf="registerForm.controls['role'].errors?.['required'] && registerForm.controls['role'].touched"  style="color:red" class="text-danger">
 			Role selection is required.
 		  </div>
 		</div>
-		<button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Submit</button>
+		<button type="submit" class="btn btn-success" [disabled]="registerForm.invalid" style="background-color: #fed13c;">Submit</button>
 		<p class="text-center mt-3">Already have an account? 
 		<button type="login" class="btn login-btn"  style="background-color: #fed13c; border-color: #f2eded;"> <a [routerLink]="['/login']">LogIn</a>
 	    </button>

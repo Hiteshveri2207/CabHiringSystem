@@ -17,7 +17,7 @@ namespace CabHiringSystem.Controllers
             _carColorService = carColorService;
         }
 
-        [HttpGet("all")]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<CarColorDTO>>> GetAllAsync()
         {
             var colors = await _carColorService.GetAllAsync();

@@ -1,0 +1,95 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Driver</h2>
+  
+    <form [formGroup]="driverForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <!-- User ID -->
+      <div class="form-group mb-3">
+        <label for="userId">User ID</label>
+        <input type="text" id="userId" formControlName="userId" class="form-control" placeholder="Enter User ID" required/>
+      </div>
+  
+      <!-- Experience -->
+      <div class="form-group mb-3">
+        <label for="experience">Experience (Years)</label>
+        <input type="text" id="experience" formControlName="experience" class="form-control" placeholder="Enter experience" required/>
+      </div>
+  
+      <!-- Profile Picture -->
+      <div class="form-group mb-3">
+        <label>Profile Picture</label>
+        <input type="file" (change)="onFileChange($event, 'ProfilePicture')" class="form-control" />
+      </div>
+
+      <!-- Aadhar Card -->
+      <div class="form-group mb-3">
+        <label>Aadhar Card Front</label>
+        <input type="file" (change)="onFileChange($event, 'AadharCardFrontPhoto')" class="form-control" required/>
+      </div>
+      <div class="form-group mb-3">
+        <label>Aadhar Card Back</label>
+        <input type="file" (change)="onFileChange($event, 'AadharCardBackPhoto')" class="form-control" required/>
+      </div>
+  
+      <!-- License -->
+      <div class="form-group mb-3">
+        <label>License Front</label>
+        <input type="file" (change)="onFileChange($event, 'LicenseFrontPhoto')" class="form-control" required/>
+      </div>
+      <div class="form-group mb-3">
+        <label>License Back</label>
+        <input type="file" (change)="onFileChange($event, 'LicenseBackPhoto')" class="form-control" required/>
+      </div>
+  
+      <fieldset formGroupName="address">
+        <legend>Address</legend>
+        <div class="form-group">
+          <label>Address Line 1</label>
+          <input type="text" class="form-control" formControlName="addressLine1"  placeholder="Enter Address Line1" required>
+        </div>
+        <div class="form-group">
+          <label>Address Line 2</label>
+          <input type="text" class="form-control" formControlName="addressLine2" placeholder="Enter Address Line2" required>
+        </div>
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" class="form-control" formControlName="city" placeholder=" Enter City" required>
+        </div>
+        <div class="form-group">
+          <label>State</label>
+          <select formControlName="stateId" class="form-control" placeholder=" Enter State" required>
+            <option value="">Select State</option>
+            <option *ngFor="let state of states" [value]="state.id">{{ state.name }}</option>
+          </select>
+                </div>
+        
+        <div class="form-group">
+          <label>Country</label>
+          <select formControlName="countryId" class="form-control" placeholder="Enter Country" required>
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
+          </select>     
+       </div>
+
+        <div class="form-group">
+            <label>ZipCode</label>
+            <input type="text" class="form-control" formControlName="zipCode"  placeholder="Enter Zip Code"  required>
+          </div>
+      </fieldset>
+
+      <!-- Buttons -->
+      <div class="d-flex gap-2">
+      <div class="d-flex gap-2 mt-3">
+  <button type="submit" class="btn btn-primary" 
+          style="padding: 10px 24px; font-weight: bold; font-size: 16px; border-radius: 8px;">
+    Submit
+  </button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()"
+          style="padding: 10px 24px; font-weight: bold; font-size: 16px; border-radius: 8px;">
+    Cancel
+  </button>
+</div>
+
+      </div>
+    </form>
+  </div>
+  

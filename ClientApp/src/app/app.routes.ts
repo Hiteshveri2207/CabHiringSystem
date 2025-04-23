@@ -13,6 +13,8 @@ import { DriverdashboardComponent } from './driverdashboard/driverdashboard.comp
 import { AddvehicleComponent } from './driverdashboard/addvehicle/addvehicle.component';
 import { CarlistsComponent } from './driverdashboard/carlists/carlists.component';
 import { UpdateVehicleComponent } from './driverdashboard/updatevehicle/updatevehicle.component';
+import { RidesComponent } from './driverdashboard/rides/rides.component';
+import { DriverProfileComponent } from './driverdashboard/driverprofile/driverprofile.component';
 
 
 
@@ -31,5 +33,9 @@ export const routes: Routes = [
     {path:'driverdashboard',component:DriverdashboardComponent},
     {path:'driverdashboard/addvehicle',component:AddvehicleComponent},
     {path:'driverdashboard/carlists',component:CarlistsComponent},
-    {path:'driverdashboard/updatevehicle',component:UpdateVehicleComponent}
+    {path:'driverdashboard/updatevehicle',component:UpdateVehicleComponent},
+    {path:'driverdashboard/rides',component:RidesComponent},
+    {path:'driverdashboard/driverprofile',component:DriverProfileComponent}
+
+
 ];

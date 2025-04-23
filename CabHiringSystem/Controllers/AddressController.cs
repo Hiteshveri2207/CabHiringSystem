@@ -28,7 +28,21 @@ namespace CabHiringSystem.Controllers
             var addresses = await _addressService.GetAllAsync();
             return Ok(new { Message = "List of the address ", Data = addresses });
         }
+        [HttpGet("GetBy/{Id}")]
+        public async Task<ActionResult<AddressDTO>> GetByIdAsync(Guid Id)
+        {
+         
+            var address = await _addressService.GetByIdAsync(Id);
+
+            if (address == null)
+            {
+                return NotFound(); 
+            }
+
+            return Ok(address); 
+        }
     }
+    
 
 }
 

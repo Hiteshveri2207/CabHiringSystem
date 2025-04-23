@@ -10,6 +10,7 @@ import { environment } from '../environment/environment';
 export class ApiService {
   private apiURL = environment.baseUrl
   constructor(private http: HttpClient) { }
+
   // GET Request
   get<T>(endpoint: string): Observable<T> {
     return this.http.get<T>(`${this.apiURL}/${endpoint}`).pipe(
@@ -37,6 +38,10 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
+  
+  // patch<T>(url: string, body: any): Observable<T> {
+  //   return this.http.patch<T>(`${this.apiURL}/${url}`, body);
+  // }
 
   // Handle API Errors
   private handleError(error: HttpErrorResponse) {

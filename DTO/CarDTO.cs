@@ -8,11 +8,10 @@ namespace DTO
 {
     public class CarDTO
     {
-
         public Guid BrandId { get; set; }
         public decimal PricePerKM { get; set; }
         public bool IsAvailable { get; set; }
         public decimal PricePerDay { get; set; }
-
     }
 }
+    

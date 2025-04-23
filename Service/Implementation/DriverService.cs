@@ -104,11 +104,11 @@ namespace Service.Implementation
                     throw new KeyNotFoundException("User not found.");
                 }
 
-
+                // Update Experience
                 if (driver.Experience != null)
                     driverEntity.Experience = driver.Experience.Value;
 
-
+                // Update ProfilePicture if provided
                 if (driver.ProfilePicture != null)
                 {
                     var profilePicturePath = await SaveFileAsync(driver.ProfilePicture, "uploads");
@@ -137,13 +137,14 @@ namespace Service.Implementation
                 _logger.LogInformation($"Driver {Id} updated successfully.");
                 return true;
             }
-
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating driver with ID {Id}");
                 return false;
             }
         }
+
+            
         public async Task<string> SaveFileAsync(IFormFile file, string subFolder)
         {
             if (file == null || file.Length == 0) return null;
@@ -174,5 +175,11 @@ namespace Service.Implementation
             return _mapper.Map<IEnumerable<DriverProfileDTO>>(drivers);
         }
 
+        public async Task<DriverProfileDTO> GeyByIdAsync(Guid Id)
+        {
+            var driver = await _repository.GetByIdAsync(Id);
+            if (driver == null) return null;
+            return _mapper.Map<DriverProfileDTO>(driver);
+        }
     }
 }

@@ -4,22 +4,21 @@
     <a href="/driverdashboard/addvehicle" style="padding: 8px 16px; background-color: #fcce04; color: rgb(11, 9, 9);
      text-decoration: none; border-radius: 4px;">Add Vehicle</a>
   </div>
-  
-  
-<table class="table">
-  <thead class="table-dark">
-    <tr>
-      <th>Driver</th>
-      <th>Brand</th>
-      <th>Seating Capacity</th>
-      <th>Model Year</th>
-      <th>VehicleModel</th>
-      <th>VehicleNumber</th>
-      <th>Action</th>
-    </tr>
-  </thead>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        
+        <th>Driver</th>
+        <th>Brand</th>
+        <th>Seating Capacity</th>
+        <th>Model Year</th>
+        <th>VehicleModel</th>
+        <th>VehicleNumber</th>
+        <th>Action</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr *ngFor="let car of cars$ | async">
+      <tr *ngFor="let car of cars">
         <td>{{ car.driverName }}</td>
         <td>{{ car.brandName }}</td>
         <td>{{ car.seatingCapacity }}</td>
@@ -27,17 +26,34 @@
         <td>{{ car.vehicleModel }}</td>
         <td>{{ car.vehicleNumber }}</td>
         <td>
-      
-          <button (click)="editvehicle(car.id)" class="btn btn-primary mb-3" style="width: 80px; 
+          <button (click)="editvehicle(car.id)" class="btn btn-primary mb-3" style=" 
           background-color: #007bff;  padding: 4px 8px; font-size: 0.8rem;">
             Edit
           </button>
-          <button (click)="deletecars(car.id)" class="btn btn-primary mb-3" style="width: 100px;
-           background-color: #dc3545; padding: 4px 8px; font-size: 0.8rem;">
+          <button (click)="deletecars(car.id)" class="btn btn-primary mb-3" style="
+           background-color:  #df1226; padding: 4px 8px; font-size: 0.8rem;">
             Delete
           </button>
         </td>
       </tr>
-      
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="pageNumber === 1">
+        <a class="page-link" (click)="onPageChange(pageNumber - 1)">Previous</a>
+      </li>
+  
+      <li *ngFor="let p of [].constructor(getTotalPages()); let i = index" 
+          class="page-item" 
+          [class.active]="pageNumber === i + 1">
+        <a class="page-link" (click)="onPageChange(i + 1)">{{ i + 1 }}</a>
+      </li>
+  
+      <li class="page-item" [class.disabled]="pageNumber === getTotalPages()">
+        <a class="page-link" (click)="onPageChange(pageNumber + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+  
+</div>

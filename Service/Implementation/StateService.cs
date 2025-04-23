@@ -15,34 +15,24 @@ namespace Service.Implementation
     public class StateService : IStateService
     {
         private readonly IGenericRepository<State> _repository;
+        private readonly IMapper _mapper;
 
-        public StateService(IGenericRepository<State> repository)
+        public StateService(IGenericRepository<State> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<StateDTO>> GetAllAsync()
         {
             var states = await _repository.GetAllAsync();
-            return states.Select(s => new StateDTO
-            {
-                CountryId = s.CountryId,
-                Name = s.Name,
-               
-            }).ToList();
+            return _mapper.Map<IEnumerable<StateDTO>>(states);
         }
 
-        public async Task<StateDTO> GetByIdAsync(Guid id)
+        public async Task<StateDTO> GetByIdAsync(Guid Id)
         {
-            var state = await _repository.GetByIdAsync(id);
-            if (state == null)
-                return null;
-
-            return new StateDTO
-            {
-                CountryId = state.CountryId,
-                Name = state.Name,
-            };
+            var state = await _repository.GetByIdAsync(Id);
+            return _mapper.Map<StateDTO>(state);
         }
     }
 }

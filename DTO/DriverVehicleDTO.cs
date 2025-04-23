@@ -16,7 +16,6 @@ namespace DTO
         public int ModelYear { get; set; }
         public int SeatingCapacity { get; set; }
     }
-
     public class DriverVehicleResponseDTO: DriverVehicleDTO
     {
         public string DriverName { get; set; }

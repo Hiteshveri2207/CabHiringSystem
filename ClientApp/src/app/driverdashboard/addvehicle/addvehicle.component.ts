@@ -4,6 +4,7 @@ import { AddVehicleService } from '../../service/addvehicle.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BrandService } from '../../service/brand.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -36,17 +37,56 @@ export class AddvehicleComponent {
   this.addVehicleForm.reset();
   
   }
-  onSubmit(): void {
 
-    alert('Form Submitted');
-          this.router.navigate([]);
-            if (this.addVehicleForm.valid) {
-              console.log(this.addVehicleForm.value); 
-            }
-            this.addVehicleService.addVehicle(this.addVehicleForm.value).subscribe({
-              next: (response) => { console.log('user added:', response); } ,
-              error: (error) => console.error("Error", error) });
-  } 
+  onSubmit(): void {
+    if (this.addVehicleForm.valid) {
+      console.log(this.addVehicleForm.value);
+      
+      Swal.fire({
+        icon: 'info',
+        title: 'Submitting Form...',
+        text: 'Please wait while we submit your vehicle data.',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+  
+      this.addVehicleService.addVehicle(this.addVehicleForm.value).subscribe({
+        next: (response) => {
+          console.log('Vehicle added:', response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Vehicle Added Successfully!',
+            text: 'The vehicle has been added.',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.router.navigate(['/vehicle-list']); 
+          });
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed!',
+            text: 'An error occurred while adding the vehicle. Please try again.',
+            confirmButtonText: 'Retry'
+          });
+        }
+      });
+  
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Form Incomplete',
+        text: 'Please complete all required fields before submitting.',
+        confirmButtonText: 'OK'
+      });
+      this.addVehicleForm.markAllAsTouched(); 
+    }
+  }
+  
   ngOnInit(): void {
     this.getBrand();
   }

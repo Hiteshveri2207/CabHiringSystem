@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RegisterService } from '../../service/register.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -18,25 +19,43 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]] 
     });
   }
+
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value); 
+      console.log(this.loginForm.value);
   
       this.registerService.LogIn(this.loginForm.value).subscribe({
         next: (response) => {
           console.log('User logged in:', response);
-          alert(" User LogIn Successfully ");
-          this.router.navigate(['/home']); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Successful',
+            text: 'User logged in successfully!',
+            confirmButtonText: 'Continue'
+          }).then(() => {
+            this.router.navigate(['/home']);
+          });
         },
         error: (error) => {
           console.error('Login error:', error);
-          alert(" Please Try Again ");
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Please try again.',
+            confirmButtonText: 'Retry'
+          });
         }
       });
+  
     } else {
       console.warn('Login form is invalid');
-      alert("Login form is invalid");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Form',
+        text: 'Please correct the errors and try again.',
+        confirmButtonText: 'OK'
+      });
       this.loginForm.markAllAsTouched(); 
     }
   }
-}
+}  

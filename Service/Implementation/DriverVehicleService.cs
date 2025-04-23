@@ -34,24 +34,26 @@ namespace Service.Implementation
 
 
         public async Task<DriverVehicleDTO> UpdateAsync(Guid Id, DriverVehicleDTO driverVehicleDTO)
-        {
-            var entity = await _context.DriverVehicle.FindAsync(Id);
-            if (entity == null)
+        
+          
             {
-                return null; 
+                var entity = await _context.DriverVehicle.FindAsync(Id);
+                if (entity == null)
+                {
+                    return null;
+                }
+                entity.DriverId = driverVehicleDTO.DriverId;
+                entity.BrandId = driverVehicleDTO.BrandId;
+                entity.VehicleNumber = driverVehicleDTO.VehicleNumber;
+                entity.ModelYear = driverVehicleDTO.ModelYear;
+                entity.VehicleModel = driverVehicleDTO.VehicleModel;
+                entity.SeatingCapacity = driverVehicleDTO.SeatingCapacity;
+
+
+                await _context.SaveChangesAsync();
+
+                return driverVehicleDTO;
             }
-            entity.DriverId = driverVehicleDTO.DriverId;
-            entity.BrandId = driverVehicleDTO.BrandId;
-            entity.VehicleNumber = driverVehicleDTO.VehicleNumber;
-            entity.ModelYear = driverVehicleDTO.ModelYear;
-            entity.VehicleModel = driverVehicleDTO.VehicleModel;
-            entity.SeatingCapacity = driverVehicleDTO.SeatingCapacity;
-
-
-            await _context.SaveChangesAsync();
-
-            return driverVehicleDTO;
-        }
 
 
         public async Task<bool> DeleteAsync(Guid Id)
@@ -95,9 +97,7 @@ namespace Service.Implementation
 
         public async Task<DriverVehicleResponseDTO> GetByIdAsync(Guid Id)
         {
-            //var entity = await _repository.GetQueryable()
-            //     //.Include(x => x.BrandId)
-            //     .FirstOrDefaultAsync(x => x.Id == Id);
+           
             var result = await (from dv in _context.DriverVehicle
                                 join brand in _context.Brand on dv.BrandId equals brand.Id
                                 join driver in _context.Driver on dv.DriverId equals driver.Id

@@ -21,6 +21,7 @@ namespace DTO
         public IFormFile LicenseFrontPhoto { get; set; }
         public IFormFile LicenseBackPhoto { get; set; }
         public AddressDTO Address { get; set; }
+          
 
 
     }

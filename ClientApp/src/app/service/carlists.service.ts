@@ -22,8 +22,9 @@ private apiURL = environment.baseUrl
   constructor(private Http: HttpClient, private apiService: ApiService, ) { }
 
 
-  getcars(): Observable<any> {
-    return this.apiService.get(`DriverVehicle/GetAll`);
+  getcars(pageNumber: number, pageSize: number): Observable<any> {
+    
+    return this.apiService.get(`DriverVehicle/GetAll?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
  deletecars(Id: string):Observable<any[]>
  {
