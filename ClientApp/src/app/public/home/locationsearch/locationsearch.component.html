@@ -1,0 +1,6 @@
+<input type="text" placeholder="Search location" #locationInput class="form-control" />
+<div *ngIf="selectedLocation">
+  <p><strong>Location:</strong> {{ selectedLocation.name }}</p>
+  <p><strong>Latitude:</strong> {{ selectedLocation.lat }}</p>
+  <p><strong>Longitude:</strong> {{ selectedLocation.lng }}</p>
+</div>

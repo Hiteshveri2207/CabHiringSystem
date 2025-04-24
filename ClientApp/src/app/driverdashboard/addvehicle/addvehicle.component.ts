@@ -38,14 +38,16 @@ export class AddvehicleComponent {
   }
   onSubmit(): void {
 
-    alert('Form Submitted');
+
           this.router.navigate([]);
             if (this.addVehicleForm.valid) {
               console.log(this.addVehicleForm.value); 
+              alert('Form Submitted');
             }
             this.addVehicleService.addVehicle(this.addVehicleForm.value).subscribe({
               next: (response) => { console.log('user added:', response); } ,
               error: (error) => console.error("Error", error) });
+              alert('Form is not Valid'); 
   } 
   ngOnInit(): void {
     this.getBrand();

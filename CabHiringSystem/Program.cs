@@ -49,7 +49,7 @@ builder.Services.AddScoped<IDriverVehicleService, DriverVehicleService>();
 builder.Services.AddScoped<IVehicleImageService, VehicleImageService>();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarColorService, CarColorService>();
-
+builder.Services.AddScoped<IBookRideService, BookRideService>();
 
 builder.Services.AddCors(options =>
 {

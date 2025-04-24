@@ -1,0 +1,47 @@
+ <!-- Promo Start -->
+ <section class="promo-sec" style="background: url('images/promo-bg.jpg')no-repeat center center / cover;">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-12">
+             <div class="promo-wrap text-center">
+                <h2 class="fw-bold text-white text-uppercase">Car Listing</h2>
+                <nav aria-label="breadcrumb w-75 mx-auto">
+                   <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="/public/carlist">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Car Listing</li>
+                   </ol>
+                </nav>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- Promo End -->
+
+ <div class="container mt-4">
+   <table class="table">
+     <thead class="table-dark">
+       <tr>
+         
+         <th>Driver</th>
+         <th>Brand</th>
+         <th>Seating Capacity</th>
+         <th>Model Year</th>
+         <th>VehicleModel</th>
+         <th>VehicleNumber</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let car of cars$ | async">
+         <td>{{ car.driverName }}</td>
+         <td>{{ car.brandName }}</td>
+         <td>{{ car.seatingCapacity }}</td>
+         <td>{{ car.modelYear }}</td>
+         <td>{{ car.vehicleModel }}</td>
+         <td>{{ car.vehicleNumber }}</td>
+        
+       </tr>
+     </tbody>
+   </table>
+</div>
+ 

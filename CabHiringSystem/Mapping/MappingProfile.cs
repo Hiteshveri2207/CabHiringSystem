@@ -35,6 +35,7 @@ namespace CabHiringSystem.Mapping
 
             CreateMap<CarColor, CarColorDTO>().ReverseMap();
 
+            CreateMap<BookRide, BookRideDTO>().ReverseMap();
         }
     }
 }

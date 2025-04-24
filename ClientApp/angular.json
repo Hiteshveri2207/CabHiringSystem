@@ -95,7 +95,7 @@
               "src/assets/font-awesome/all.min.css",
               "node_modules/font-awesome/css/all.min.css",
               "node_modules/swiper/swiper-bundle.css"
-
+                
             ],
             
             "scripts": []

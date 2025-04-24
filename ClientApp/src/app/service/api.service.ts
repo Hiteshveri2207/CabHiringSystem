@@ -9,6 +9,7 @@ import { environment } from '../environment/environment';
 })
 export class ApiService {
   private apiURL = environment.baseUrl
+  create: Observable<any> | undefined;
   constructor(private http: HttpClient) { }
   // GET Request
   get<T>(endpoint: string): Observable<T> {

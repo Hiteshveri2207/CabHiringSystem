@@ -27,8 +27,12 @@ namespace DataAccessLayer.Data
         public DbSet<Car> Car { get; set; }
 
         public DbSet<CarColor> CarColor { get; set; }
+        public DbSet<BookRide> BookRides { get; set; }
 
-
+       
     }
-
 }
+
+
+
+

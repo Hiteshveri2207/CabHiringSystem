@@ -8,6 +8,11 @@ import { CommonModule } from '@angular/common';
 import { DriverfooterComponent } from './driverdashboard/driverfooter/driverfooter.component';
 import { DriverheaderComponent } from './driverdashboard/driverheader/driverheader.component';
 import { NavComponent } from './driverdashboard/nav/nav.component';
+import { CustomerfooterComponent } from './customerdashboard/customerfooter/customerfooter.component';
+import { CustomerheaderComponent } from './customerdashboard/customerheader/customerheader.component';
+import { CustomernavComponent } from './customerdashboard/customernav/customernav.component';
+import { CustomerdashboardComponent } from './customerdashboard/customerdashboard.component';
+// import { CustomerdashboardComponent } from './customerdashboard/customerdashboard.component';
 
 
 @Component({
@@ -17,7 +22,11 @@ import { NavComponent } from './driverdashboard/nav/nav.component';
     HeaderComponent,
      FooterComponent,
      CommonModule, DriverfooterComponent , DriverheaderComponent ,
-       NavComponent
+       NavComponent,
+       CustomernavComponent,
+       CustomerfooterComponent,
+       CustomerheaderComponent,
+       
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -25,10 +34,14 @@ import { NavComponent } from './driverdashboard/nav/nav.component';
 export class AppComponent {
   title = 'Taxi-app';
 
-  showHeaderFooter: boolean = true;
+  showHeaderFooter: boolean = false;
+  showCustomerDashboard:boolean = true;
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.showHeaderFooter = !this.router.url.includes('driverdashboard');
+    });
+    this.router.events.subscribe(() => {
+    this.showCustomerDashboard = !this.router.url.includes('customerdashboard');
     });
   }
 }

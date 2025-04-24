@@ -1,0 +1,39 @@
+
+  
+  <div class="container mt-4">
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>From Location</th>
+          <th>To Location</th>
+          <th>Trip Type</th>
+          <th>Departure Date</th>
+          <th>Return Date</th>
+          <th>Number of Adults</th>
+          <th>Number of Children</th>
+          <th>Number of Infants</th>
+          <th>Additional Notes</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+
+      
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of rideRequests$ | async">
+         <td>{{ request.fromLocation }}</td>
+          <td>{{ request.toLocation }}</td>
+          <td>{{ request.tripType }}</td>
+          <td>{{ request.departureDate }}</td>
+          <td>{{ request.returnDate }}</td>
+          <td>{{ request.numberOfAdults }}</td>
+          <td>{{ request.numberOfChildren }}</td>
+          <td>{{ request.numberOfInfants }}</td>
+          <td>{{ request.additionalNotes }}</td>
+          <td>{{ request.status}}</td>
+          <td>{{ request.action}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

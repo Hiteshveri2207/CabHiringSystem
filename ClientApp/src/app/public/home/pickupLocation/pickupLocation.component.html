@@ -1,0 +1,90 @@
+<div class="csw_inner">
+    <!-- From City -->
+    <div class="csw_inputBox searchCity increaseHeight">
+      <label for="fromCity">
+        <span class="cswInputLabel">From</span>
+        <input
+          id="fromCity"
+          type="text"
+          class="csw_inputField cswInputText"
+          [value]="fromCity"
+          readonly
+        />
+      </label>
+    </div>
+  
+    <!-- Swap Icon -->
+    <span class="swipCircle">-
+      <span class="landingSprite swipIcon"></span>
+    </span>
+  
+    <!-- To City -->
+    <div class="csw_inputBox searchToCity increaseHeight">
+      <label for="toCity">
+        <span class="cswInputLabel">To</span>
+        <input
+          id="toCity"
+          type="text"
+          class="csw_inputField cswInputText"
+          [value]="toCity"
+          readonly
+        />
+      </label>
+    </div>
+  
+    <!-- Departure Date -->
+    <div class="csw_inputBox dates increaseHeight">
+      <label for="departure">
+        <span class="downArrow cswInputLabel">Departure</span>
+        <input
+          id="departure"
+          type="text"
+          class="csw_inputField font20"
+          [value]="departureDate | date:'fullDate'"
+          readonly
+        />
+        <p class="blackText font20 code">
+          <span class="selectedDate">{{ departureDate | date:'d' }}</span>
+          <span class="selectedMonth">{{ departureDate | date:'MMM' }}</span>
+          <span class="shortYear selectedYear">{{ departureDate | date:'yy' }}</span>
+        </p>
+        <p class="selectedDay">{{ departureDate | date:'EEEE' }}</p>
+      </label>
+    </div>
+  
+    <!-- Return Date -->
+    <div class="csw_inputBox dates reDates increaseHeight">
+      <label for="return">
+        <span class="downArrow cswInputLabel">Return</span>
+        <input
+          id="return"
+          type="text"
+          class="csw_inputField font20"
+          [value]="returnDate ? (returnDate | date:'fullDate') : 'Tap to add a return date for bigger discounts'"
+          readonly
+        />
+        <p class="returnInputText" *ngIf="!returnDate">Tap to add a return date for bigger discounts</p>
+      </label>
+      <p class="dateErrorMsg whiteText" id="range_error">You are booking cab for more than 30 days</p>
+    </div>
+  
+    <!-- Pickup Time -->
+    <div class="csw_inputBox timePicker increaseHeight">
+      <label for="pickupTime">
+        <span class="downArrow cswInputLabel">Pickup-Time</span>
+        <input
+          id="pickupTime"
+          type="text"
+          class="hsw_inputField font20"
+          [value]="pickupTime"
+          readonly
+        />
+        <p class="code font30 blackText">
+          <span class="selectedTime">{{ pickupTime }}</span>
+          <span class="selectedMerediam">{{ meridiem }}</span>
+        </p>
+      </label>
+    </div>
+  </div>
+  
+ 

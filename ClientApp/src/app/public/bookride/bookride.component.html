@@ -1,0 +1,122 @@
+<section class="promo-sec" style="background: url('images/promo-bg.jpg') no-repeat center center / cover;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="promo-wrap text-center">
+          <h2 class="fw-bold text-white text-uppercase">Book your Ride</h2>
+          <nav aria-label="breadcrumb w-75 mx-auto">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Book Ride</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="main sec-padding">
+  <div class="container">
+    <div class="row pb-5 mb-5">
+      <div class="col-lg-12">
+        <div class="card bg-light booking-sec">
+          <div class="text-center col-xl-7 col-md-10 mx-auto">
+            <h2 class="sec-title">Book your Ride Today!</h2>
+          </div>
+
+          <form [formGroup]="bookRideForm" (ngSubmit)="onSubmit()" class="booking-form mt-5 row">
+              <div class="form-group col-lg-6">
+              <label for="firstname">First Name:-</label>
+              <input class="form-control" type="text" placeholder="First Name" formControlName="firstName">
+              <span><i class="fa fa-user"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="lastName">Last Name:-</label>
+               <input class="form-control" type="text" placeholder="Last Name" formControlName="lastName">
+              <span><i class="fa fa-user"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="phone-call">Phone Number:-</label>
+              <input class="form-control" type="text" placeholder="Phone Number" formControlName="phoneNumber">
+              <span><i class="fa fa-phone"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="enter your email">Enter Your Email:-</label>
+               <input class="form-control" type="email" placeholder="Enter your Email" formControlName="email">
+              <span><i class="fa fa-envelope"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="fromLocation">From Location:-</label>
+               <input class="form-control" type="text" placeholder="From Location" formControlName="fromLocation">
+              <span><i class="fa fa-map-marker"></i></span>
+            </div>
+          
+            <div class="form-group col-lg-6">
+              <label for="toLocation">To Location:-</label>
+              <input class="form-control" type="text" placeholder="To Location" formControlName="toLocation">
+              <span><i class="fa fa-map-marker"></i></span>
+            </div>
+ 
+            <div class="form-group col-lg-6">
+              <label for="select trip type">Select Trip Type:-</label>
+              <select class="form-control" formControlName="tripType">
+                <option value="" disabled selected>Select Trip Type</option>
+                <option value="oneWay">One Way</option>
+                <option value="roundTrip">Round Trip</option>
+              </select>
+              <span><i class="fa fa-exchange"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="departureDate">Departure Date:-</label>
+              <input class="form-control" type="date" placeholder="Departure Date" formControlName="departureDate">
+              <span><i class="fa fa-calendar"></i></span>
+            </div>
+
+            <div *ngIf="bookRideForm.get('tripType')?.value !== 'oneWay'" class="form-group col-lg-6">
+              <label for="returnDate">Return Date:-</label>
+              <input class="form-control" type="date" placeholder="Return Date" formControlName="returnDate">
+              <span><i class="fa fa-calendar"></i></span>
+            </div>
+            
+
+            <div class="form-group col-lg-6">
+              <label for="number of adults">Number Of Adults:-</label>
+              <input class="form-control" type="number" min="1" placeholder="No. of Adults" formControlName="numberOfAdults">
+              <span><i class="fa fa-user"></i></span>
+            </div>
+
+
+            <div class="form-group col-lg-6">
+              <label for="numberOfChildrens">Number of Children:-</label>
+              <input class="form-control" type="number" min="0" placeholder="No. of Children" formControlName="numberOfChildrens">
+              <span><i class="fa fa-child"></i></span>
+            </div>
+
+            <div class="form-group col-lg-6">
+              <label for="numberOfInfants">Number Of Infants:-</label>
+              <input class="form-control" type="number" min="0" placeholder="No. of Infants" formControlName="numberOfInfants">
+              <span><i class="fa fa-baby"></i></span>
+            </div>
+
+            <div class="form-group col-lg-12">
+              <label for="additionalnotes">Additional Notes:-</label>
+              <textarea class="form-control" placeholder="Additional Notes..." rows="6" formControlName="additionalNotes"></textarea>
+              <span><i class="fa fa-pen"></i></span>
+            </div>
+
+            <div class="form-group text-center mt-5">
+              <button type="submit" class="btn btn-primary">Book Now</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

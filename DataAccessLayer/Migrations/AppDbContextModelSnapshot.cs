@@ -74,7 +74,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.ApplicationUser", b =>
@@ -154,9 +154,68 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("DataAccessLayer.Entity.BookRide", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AdditionalNotes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartureDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FromLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfAdults")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfChildren")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfInfants")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReturnDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ToLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TripType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BookRides");
+                });
+
             modelBuilder.Entity("DataAccessLayer.Entity.Brand", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -164,9 +223,9 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Brand", (string)null);
+                    b.ToTable("Brand");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.Car", b =>
@@ -189,7 +248,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Car", (string)null);
+                    b.ToTable("Car");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.CarColor", b =>
@@ -204,7 +263,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarColor", (string)null);
+                    b.ToTable("CarColor");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.Country", b =>
@@ -237,7 +296,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country", (string)null);
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.CustomerProfile", b =>
@@ -269,7 +328,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.DriverProfile", b =>
@@ -320,7 +379,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Driver", (string)null);
+                    b.ToTable("Driver");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.DriverVehicle", b =>
@@ -369,7 +428,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DriverVehicle", (string)null);
+                    b.ToTable("DriverVehicle");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.State", b =>
@@ -389,7 +448,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("States", (string)null);
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("DataAccessLayer.Entity.VehicleImage", b =>
@@ -425,7 +484,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VehicleImage", (string)null);
+                    b.ToTable("VehicleImage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
