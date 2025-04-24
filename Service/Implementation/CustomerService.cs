@@ -35,11 +35,7 @@ namespace Service.Implementation
 
         }
 
-
-         
-
-
-        public async Task<String> AddOrUpdate(CustomerDTO customerDTO)
+        public async Task<string> AddOrUpdate(CustomerDTO customerDTO)
         {
             if (customerDTO == null)
                 return "Invalid Data";
@@ -118,16 +114,16 @@ namespace Service.Implementation
         }
 
 
-        public async Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid Id)
+        public async Task<CustomerResponseDTO> GetByIdAsync(Guid Id)
         {
-            var customerQuery = _repository.GetQueryable(); 
+            var customerQuery = _repository.GetQueryable();
             var userQuery = _userManager.Users.AsQueryable();
-           
+
 
             var result = await (from customer in customerQuery
                                 join user in userQuery on customer.UserId.ToString() equals user.Id.ToString()
                                 where customer.Id == Id
-                                select new CustomerResponseDto
+                                select new CustomerResponseDTO
                                 {
                                     FirstName = user.FirstName,
 
@@ -139,16 +135,15 @@ namespace Service.Implementation
 
                                     PhoneNumber = user.PhoneNumber,
 
-                                    Role = "Customer"
-
-
 
                                 }).FirstOrDefaultAsync();
-
             return result;
+
+
         }
 
     }
+
 }
 
 

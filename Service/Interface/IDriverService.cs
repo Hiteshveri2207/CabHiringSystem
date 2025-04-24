@@ -10,6 +10,7 @@ namespace Service.Interface
         Task<IEnumerable<DriverProfileDTO>> GetAllAsync();
         Task<DriverProfileDTO> AddDriver(DriverProfileDTO driver);
         Task<bool> UpdateDriver(Guid Id, DriverProfileDTO driver);
+        Task<DriverProfileDTO> GeyByIdAsync(Guid Id);
         Task<string> SaveFileAsync(IFormFile file, string subFolder);
         
     }

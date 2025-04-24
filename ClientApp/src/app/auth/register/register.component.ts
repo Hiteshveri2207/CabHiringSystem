@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { RoleService } from '../../service/role.service';
 import { Router, RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
 
@@ -53,20 +55,37 @@ export class RegisterComponent {
       this.registerService.register(this.registerForm.value).subscribe({
         next: (response) => {
           console.log('User registered:', response);
-          alert('User registered successfully!');
-          this.router.navigate(['/login']); 
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'User registered successfully!',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.router.navigate(['/login']);
+          });
         },
         error: (error) => {
           console.error('Registration error:', error);
-          alert('Registration failed. Please try again.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Please try again.',
+            confirmButtonText: 'Retry'
+          });
         }
       });
   
     } else {
-      this.registerForm.markAllAsTouched(); 
-      alert('Form is invalid. Please fix the errors.');
+      this.registerForm.markAllAsTouched();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Form',
+        text: 'Please fix the errors in the form.',
+        confirmButtonText: 'OK'
+      });
     }
   }
+  
   
 
   navigateToLogin() {

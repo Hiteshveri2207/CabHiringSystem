@@ -33,6 +33,19 @@ namespace Service.Implementation
             var addresses = await _addressRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<AddressDTO>>(addresses);
         }
+
+        public async Task<AddressDTO> GetByIdAsync(Guid Id)
+        {
+            var address = await _addressRepository.GetByIdAsync(Id);
+
+            if (address == null)
+            {
+                return null;
+            }
+
+            var addressDTO = _mapper.Map<AddressDTO>(address);
+            return addressDTO;
+        } 
        
     }
 }

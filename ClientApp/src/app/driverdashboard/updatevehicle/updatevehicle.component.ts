@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateVehicleService } from '../../service/updatevehicle.service';
 import { Observable } from 'rxjs';
 import { BrandService } from '../../service/brand.service';
+import Swal from 'sweetalert2'; // Ensure SweetAlert2 is imported at the top
+
 
 
 @Component({
@@ -42,7 +44,6 @@ ngOnInit(): void {
   this.loadvehicle();
     this.route.queryParams.subscribe(params => {
     this.driverVehicleId  = params['Id'];})
-  //this.driverVehicleId = this.route.snapshot.params['id'];
   this.loadVehicleDetails();
   this.getBrand();
 }    
@@ -65,18 +66,30 @@ loadVehicleDetails(): void {
     },
   );
 }
+
 updatevehicle(formData: any): void {
   this.updateVehicleService.updatevehicle(this.driverVehicleId, formData).subscribe({
     next: (response) => {
       console.log("Vehicle updated successfully!", response);
-      alert("Vehicle updated successfully!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Vehicle Updated!',
+        text: 'The vehicle details were updated successfully.',
+        confirmButtonText: 'OK'
+      });
     },
     error: (error) => {
       console.error("Error updating vehicle:", error);
-      alert("Failed to update vehicle. Check console for details.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Update Failed',
+        text: 'Failed to update vehicle. Please check the console for details.',
+        confirmButtonText: 'Retry'
+      });
     }
   });
 }
+
 
 onSubmit(): void {
   if (this.updateVehicleForm.invalid || !this.driverVehicleId) {

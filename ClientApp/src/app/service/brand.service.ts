@@ -15,4 +15,5 @@ private apiURL = environment.baseUrl
   getBrand(): Observable<any[]> {
     return this.apiService.get(`Brand/GetAll`);
 }
+
 }

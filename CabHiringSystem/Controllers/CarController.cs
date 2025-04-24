@@ -17,7 +17,6 @@ namespace CabHiringSystem.Controllers
                 _carService = carService;
             }
 
-            // Add a new car
             [HttpPost("Add")]
             public async Task<ActionResult<CarDTO>> AddCar([FromBody] CarDTO carDTO)
             {
@@ -28,7 +27,6 @@ namespace CabHiringSystem.Controllers
                 return (addedCar);
             }
 
-            // Get all cars
             [HttpGet("GetAll")]
             public async Task<ActionResult<IEnumerable<CarDTO>>> GetAllCars()
             {
@@ -36,10 +34,6 @@ namespace CabHiringSystem.Controllers
                 return Ok(cars);
             }
 
-           
-           
-
-            // Update car details
             [HttpPut("Update/{Id}")]
             public async Task<ActionResult<CarDTO>> UpdateCar(Guid Id, [FromBody] CarDTO carDTO)
             {
@@ -53,7 +47,6 @@ namespace CabHiringSystem.Controllers
                 return Ok(updatedCar);
             }
 
-            // Delete a car
             [HttpDelete("Delete/{Id}")]
             public async Task<IActionResult> DeleteCar(Guid Id)
             {

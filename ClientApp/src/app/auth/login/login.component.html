@@ -25,11 +25,11 @@
           formControlName="password"
           placeholder="Enter your password"
         />
-        <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="text-danger">
+        <div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched" class="btn btn-danger">
            Password is required.
         </div>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid"  >
+      <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid"  >
         Log In
         
       </button>

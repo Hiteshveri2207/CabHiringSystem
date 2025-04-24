@@ -22,6 +22,8 @@ import { CustomerdashboardComponent } from './customerdashboard/customerdashboar
 import { CustomernavComponent } from './customerdashboard/customernav/customernav.component';
 import { RideRequestsComponent } from './customerdashboard/riderequests/riderequests.component';
 import { RideHistoryComponent } from './customerdashboard/ridehistory/ridehistory.component';
+import { RidesComponent } from './driverdashboard/rides/rides.component';
+import { DriverProfileComponent } from './driverdashboard/driverprofile/driverprofile.component';
 
 
 
@@ -41,17 +43,5 @@ export const routes: Routes = [
     {path:'driverdashboard',component:DriverdashboardComponent},
     {path:'driverdashboard/addvehicle',component:AddvehicleComponent},
     {path:'driverdashboard/carlists',component:CarlistsComponent},
-    {path:'driverdashboard/updatevehicle',component:UpdateVehicleComponent},
-    {path:'home/pickupLocation',component:pickupLocationComponent},
-    {path:'home/locationsearch',component: LocationsearchComponent },
-    {path:'public/carlist',component:CarListComponent},
-    {path:'customerdashboard/customerheader',component:CustomerheaderComponent},
-    {path:'customerdashboard/customerfooter',component:CustomerfooterComponent},
-    {path:'customerdashboard',component:CustomerdashboardComponent},
-    {path:'customerdashboard/customernav',component:CustomernavComponent},
-    {path:'customerdashboard/riderequests',component:RideRequestsComponent},
-    {path:'customerdashboard/ridehistory',component:RideHistoryComponent}
-
-
-    
+    {path:'driverdashboard/updatevehicle',component:UpdateVehicleComponent}
 ];

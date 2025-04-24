@@ -88,12 +88,19 @@
     
   
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary" >
-        Submit
-      </button>
-      <button type="cancel" class="btn btn-primary" (click)="cancel()" >
-      Cancel
-      </button>
+      <div style="display: flex; gap: 12px; margin-top: 20px;">
+        <button type="submit" class="btn btn-primary"
+                style="padding: 10px 24px; font-size: 16px; font-weight: bold; border-radius: 6px;">
+          Submit
+        </button>
+      
+        <button type="button" class="btn btn-secondary"
+                (click)="cancel()"
+                style="padding: 10px 24px; font-size: 16px; font-weight: bold; border-radius: 6px;">
+          Cancel
+        </button>
+      </div>
+      
     </form>
   </div>
   

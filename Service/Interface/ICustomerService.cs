@@ -11,10 +11,10 @@ namespace Service.Interface
 {
     public interface ICustomerService
     {
-        Task<string> AddOrUpdate(CustomerDTO customerDto);
+        Task<string> AddOrUpdate(CustomerDTO customerDTO);
         Task<string> UploadFileAsync(IFormFile file);
 
-        Task<CustomerResponseDto> GetCustomerProfileByIdAsync(Guid Id);
+        Task<CustomerResponseDTO> GetByIdAsync(Guid Id);
      
     }
 }

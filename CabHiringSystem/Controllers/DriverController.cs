@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using DataAccessLayer.Entity;
+using Service.Implementation;
 
 namespace WebAPI.Controllers
 {
@@ -55,6 +56,23 @@ namespace WebAPI.Controllers
         {
             var drivers = await _driverService.GetAllAsync();
             return drivers;
+        }
+
+        [HttpGet("GetBy/{Id}")]
+        public async Task<ActionResult<DriverProfileDTO>> GetByIdAsync(Guid Id)
+        {
+      
+                var driver = await _driverService.GeyByIdAsync(Id);
+
+                if (driver == null)
+                {
+                    return NotFound(new { Message = "Driver not found" });
+                }
+
+                return Ok(driver);
+            
+
+
         }
 
     }

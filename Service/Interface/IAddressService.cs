@@ -13,6 +13,7 @@ namespace Service.Interface
 
         Task<IEnumerable<AddressDTO>> GetAllAsync();
         Task<AddressDTO> AddAsync(AddressDTO address);
+        Task<AddressDTO> GetByIdAsync(Guid Id);
         
     }
 }

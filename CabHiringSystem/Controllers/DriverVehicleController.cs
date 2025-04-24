@@ -20,7 +20,7 @@ namespace CabHiringSystem.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<DriverVehicleResponseDTO>> GetAllAsync(int pageNumber = 1, int pageSize = 10)
+        public async Task<ActionResult<DriverVehicleResponseDTO>> GetAllAsync(int pageNumber = 1, int pageSize = 1)
         {
             var (vehicle, totalCount) = await _driverVehicleService.GetAllAsync(pageNumber, pageSize);
             return Ok(new
